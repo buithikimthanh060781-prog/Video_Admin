@@ -1,0 +1,4 @@
+project name: buithikimthanh060781-prog's Project
+password:vDbocZgCzIdvM0Oj
+project url: https://laoxrsdemwvwcpqjqecq.supabase.co
+publishable key :sb_publishable_HBbNUGykr-mqk0oDBMrAIA_PyBQ9fmM

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Register - Video Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-auth-page="register">
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">Video Admin</div>
+      <h1 class="auth-title">Đăng ký</h1>
+      <form id="auth-form" class="auth-form" novalidate>
+        <div class="form-message" role="alert" hidden></div>
+        <fieldset>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username">
+            <small class="field-error" data-error-for="username"></small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+            <small class="field-error" data-error-for="email"></small>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="new-password">
+            <small class="field-error" data-error-for="password"></small>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password">
+            <small class="field-error" data-error-for="confirmPassword"></small>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
+        </fieldset>
+      </form>
+      <p class="auth-footer">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+    </div>
+  </main>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

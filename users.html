@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Users - Video Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <section class="card">
+          <div class="toolbar">
+            <div class="toolbar-filters">
+              <input type="search" id="search-input" placeholder="Tìm theo username, email..." aria-label="Tìm theo username hoặc email">
+              <select id="role-filter" aria-label="Lọc theo role">
+                <option value="">Tất cả role</option>
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
+              </select>
+              <select id="status-filter" aria-label="Lọc theo status">
+                <option value="">Tất cả status</option>
+                <option value="ACTIVE">Active</option>
+                <option value="INACTIVE">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Avatar</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Created At</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+
+          <div id="pagination"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/users.js"></script>
+</body>
+</html>

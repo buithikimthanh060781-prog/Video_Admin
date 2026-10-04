@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Library - Video Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <section class="card">
+          <div class="toolbar">
+            <div class="toolbar-filters">
+              <input type="search" id="search-input" placeholder="Tìm video..." aria-label="Tìm video theo tên">
+              <select id="category-filter" aria-label="Lọc theo category">
+                <option value="">Tất cả category</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="video-grid" class="video-grid" aria-live="polite"></div>
+          <div id="pagination"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/library.js"></script>
+</body>
+</html>

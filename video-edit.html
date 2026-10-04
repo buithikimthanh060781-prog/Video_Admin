@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Video - Video Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <a href="videos.html" class="back-link">← Quay lại danh sách</a>
+
+        <div id="page-state" hidden></div>
+
+        <form id="video-form" class="video-form" novalidate hidden>
+          <div class="form-message" role="alert" hidden></div>
+          <fieldset class="video-form-grid">
+            <section class="card">
+              <h2 class="card-title">Thông tin video</h2>
+              <div class="form-group">
+                <label for="title">Title <span class="required">*</span></label>
+                <input id="title" name="title" type="text" maxlength="200">
+                <small class="field-error" data-error-for="title"></small>
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" maxlength="5000" rows="5"></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="category">Category <span class="required">*</span></label>
+                  <select id="category" name="category">
+                    <option value="">-- Chọn category --</option>
+                  </select>
+                  <small class="field-error" data-error-for="category"></small>
+                </div>
+                <div class="form-group">
+                  <label for="status">Status</label>
+                  <select id="status" name="status">
+                    <option value="PUBLISHED">Published</option>
+                    <option value="DRAFT">Draft</option>
+                    <option value="HIDDEN">Hidden</option>
+                  </select>
+                </div>
+              </div>
+              <dl id="video-meta" class="info-list video-meta" hidden></dl>
+            </section>
+
+            <section class="card">
+              <h2 class="card-title">Media</h2>
+
+              <div class="form-group" id="source-group">
+                <label id="source-label">Nguồn video <span class="required">*</span></label>
+                <div class="source-switch" role="radiogroup" aria-labelledby="source-label">
+                  <label class="source-option"><input type="radio" name="source" value="UPLOAD" checked><span>Upload file</span></label>
+                  <label class="source-option"><input type="radio" name="source" value="YOUTUBE"><span>Link YouTube</span></label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="thumbnail">Thumbnail</label>
+                <div class="media-preview">
+                  <img id="thumbnail-preview" src="assets/thumbnail-placeholder.svg" alt="Thumbnail preview">
+                </div>
+                <input id="thumbnail" name="thumbnail" type="file" accept="image/jpeg,image/png,image/webp">
+                <small class="form-hint">JPG, PNG, WEBP · tối đa 5 MB</small>
+                <small class="field-error" data-error-for="thumbnail"></small>
+              </div>
+
+              <div class="form-group" id="video-upload-group">
+                <label for="video">Video <span class="required">*</span></label>
+                <div class="media-preview" id="video-preview-wrapper" hidden>
+                  <video id="video-preview" controls preload="metadata"></video>
+                </div>
+                <input id="video" name="video" type="file" accept="video/mp4,video/webm">
+                <small class="form-hint">MP4, WEBM · tối đa 50 MB</small>
+                <small class="field-error" data-error-for="video"></small>
+              </div>
+
+              <div class="form-group" id="youtube-group" hidden>
+                <label for="youtube-url">Link YouTube <span class="required">*</span></label>
+                <input id="youtube-url" name="youtubeUrl" type="url" inputmode="url" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off">
+                <small class="form-hint">Hỗ trợ link youtube.com/watch, youtu.be, shorts, embed. Không chọn thumbnail thì dùng ảnh bìa của YouTube.</small>
+                <small class="field-error" data-error-for="youtubeUrl"></small>
+                <div class="media-preview" id="youtube-preview-wrapper" hidden>
+                  <iframe id="youtube-preview" title="Xem trước video YouTube" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+              </div>
+
+              <div class="form-group" id="video-current-group" hidden>
+                <label>Video</label>
+                <div class="media-preview" id="video-current-wrapper">
+                  <video id="video-current" controls preload="metadata"></video>
+                </div>
+                <small class="form-hint" id="video-current-hint"></small>
+              </div>
+            </section>
+          </fieldset>
+
+          <div class="form-actions">
+            <a href="videos.html" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/video-edit.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Watch - Video Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <a href="library.html" class="back-link">← Quay lại thư viện</a>
+
+        <div id="page-state" hidden></div>
+
+        <div id="watch-layout" class="watch-layout" hidden>
+          <section class="watch-main">
+            <div id="player" class="player"></div>
+            <div class="card">
+              <h2 id="watch-title" class="watch-title"></h2>
+              <div class="watch-meta">
+                <span id="watch-category"></span>
+                <span id="watch-views"></span>
+                <span id="watch-date"></span>
+              </div>
+              <p id="watch-description" class="watch-description"></p>
+            </div>
+          </section>
+
+          <aside class="card watch-related">
+            <h2 class="card-title">Video khác</h2>
+            <div id="related-list" class="related-list"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/watch.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Dashboard - Video Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <!-- Statistics -->
+        <section class="stats-grid" aria-label="Thống kê">
+          <div class="card stat-card" data-stat="total_videos" data-icon="video">
+            <div><div class="stat-label">Total Videos</div><div class="stat-value">—</div></div>
+          </div>
+          <div class="card stat-card" data-stat="total_views" data-icon="eye">
+            <div><div class="stat-label">Total Views</div><div class="stat-value">—</div></div>
+          </div>
+          <div class="card stat-card" data-stat="storage_used" data-icon="storage">
+            <div><div class="stat-label">Storage Used</div><div class="stat-value">—</div></div>
+          </div>
+          <div class="card stat-card" data-stat="total_users" data-icon="users">
+            <div><div class="stat-label">Total Users</div><div class="stat-value">—</div></div>
+          </div>
+        </section>
+
+        <!-- Top 10 videos -->
+        <section class="dashboard-grid">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Top 10 videos by views</h2>
+            </div>
+            <div id="top-chart-container" class="chart-container"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Top 10 videos</h2>
+            </div>
+            <div class="table-wrapper">
+              <table class="table table-compact">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Thumbnail</th>
+                    <th>Title</th>
+                    <th class="text-right">Views</th>
+                  </tr>
+                </thead>
+                <tbody id="top-videos-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Views over time -->
+        <section class="card">
+          <div class="card-header">
+            <h2 class="card-title">Views over time</h2>
+            <div class="segmented" id="views-range" role="group" aria-label="Khoảng thời gian">
+              <button type="button" data-range="7days" class="active">7 days</button>
+              <button type="button" data-range="30days">30 days</button>
+              <button type="button" data-range="thisMonth">This month</button>
+              <button type="button" data-range="thisYear">This year</button>
+            </div>
+          </div>
+          <div id="views-chart-container" class="chart-container"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

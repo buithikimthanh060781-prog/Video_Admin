@@ -1,0 +1,38 @@
+Tôi đang học Vibe Coding. Tôi muốn build 1 website admin quản lý video với các trang sau:
+
+Ngôn ngữ lập trình: chỉ sử dụng HTML CSS JavaScript. Connect đến Supabase
+Giao diện: tông màu sáng, nền trắng (light mode)
+
+Dashboard
+Tổng số video
+Tổng lượt xem
+Dung lượng storage
+Biểu đồ cột: 10 video nhiều lượt xem nhất
+Biểu đồ line: lượt xem theo ngày/tháng
+
+List Video
+Danh sách video gồm: id, title, thumbnail, views, action (Edit, Delete)
+
+3 trang login, register, forgot password
+
+Table users quản lý người dùng.
+Table videos quản lý video.
+Thêm các table khác như video_categories...
+
+Account:
+username: admin1
+email: admin1@gmail.com
+password: 123456
+role: ADMIN
+
+username: user1
+email: user1@gmail.com
+password: 123456
+role: USER
+
+Hãy tạo cho tôi các file .MD cần thiết
+
+
+Hãy đọc các file .md
+File supabase.txt là thông tin project trên supabase
+Hãy tạo project dựa trên các file .md và supabase.txt

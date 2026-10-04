@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Account - Video Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <div class="card account-card">
+          <h2 class="card-title">Thông tin tài khoản</h2>
+
+          <div class="account-avatar">
+            <span id="account-avatar" class="avatar avatar-xl"></span>
+            <div class="account-avatar-actions">
+              <div class="account-avatar-buttons">
+                <label class="btn btn-secondary btn-sm" for="avatar-input">Đổi avatar</label>
+                <input id="avatar-input" type="file" accept="image/jpeg,image/png,image/webp" class="visually-hidden">
+                <button id="avatar-remove" type="button" class="btn btn-secondary btn-sm text-danger" hidden>Xóa avatar</button>
+              </div>
+              <small class="form-hint">JPG, PNG, WEBP · tối đa 2 MB</small>
+              <small id="avatar-error" class="field-error"></small>
+            </div>
+          </div>
+
+          <dl class="info-list">
+            <dt>Username</dt><dd id="account-username"></dd>
+            <dt>Email</dt><dd id="account-email"></dd>
+            <dt>Role</dt><dd id="account-role"></dd>
+            <dt>Status</dt><dd id="account-status"></dd>
+            <dt>Ngày tạo</dt><dd id="account-created-at"></dd>
+          </dl>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/account.js"></script>
+</body>
+</html>
