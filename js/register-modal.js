@@ -1,7 +1,7 @@
 // Popup đăng ký thành viên 2 cột (cùng khung với popup đăng nhập) cho trang công khai.
 // Đăng ký xong: đóng popup, hiện thông báo "chờ quản trị viên kích hoạt" ngay trên trang hiện tại.
-import { bindRegisterForm } from './auth.js?v=202610171935';
-import { showToast } from './components.js?v=202610171935';
+import { bindRegisterForm } from './auth.js?v=202610171951';
+import { showToast } from './components.js?v=202610171951';
 import {
   createAside,
   createAuthMain,
@@ -11,8 +11,8 @@ import {
   createSwitchLink,
   openAuthModal,
   openLoginModal,
-} from './login-modal.js?v=202610171935';
-import { createElement } from './utils.js?v=202610171935';
+} from './login-modal.js?v=202610171951';
+import { createElement } from './utils.js?v=202610171951';
 
 const ID_PREFIX = 'register';
 

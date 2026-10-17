@@ -10,11 +10,11 @@
   <link rel="preload" href="assets/fonts/be-vietnam-pro-800-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/be-vietnam-pro-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
   <title>Học Vèo – Học nhanh như vèo, nhớ lâu như in</title>
-  <link rel="stylesheet" href="css/style.css?v=202610171935">
-  <link rel="stylesheet" href="css/auth.css?v=202610171935">
-  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
-  <link rel="stylesheet" href="css/courses.css?v=202610171935">
-  <link rel="stylesheet" href="css/landing.css?v=202610171935">
+  <link rel="stylesheet" href="css/style.css?v=202610171951">
+  <link rel="stylesheet" href="css/auth.css?v=202610171951">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171951">
+  <link rel="stylesheet" href="css/courses.css?v=202610171951">
+  <link rel="stylesheet" href="css/landing.css?v=202610171951">
 </head>
 <body class="public-page landing-page">
   <a class="skip-link" href="#courses">Bỏ qua, đến danh sách khóa học</a>
@@ -59,6 +59,16 @@
       </div>
     </section>
 
+    <!-- ---------- Danh mục: lấy từ course_categories, chỉ hiện khi có lĩnh vực đang có khóa học (course-catalog.js) ---------- -->
+    <section id="danh-muc" class="categories-section" aria-labelledby="categories-title" hidden>
+      <div class="section-intro">
+        <p class="section-kicker">Danh mục</p>
+        <h2 id="categories-title" class="section-heading">Khám phá lĩnh vực bạn yêu thích</h2>
+        <p class="section-lead">Chọn một lĩnh vực để xem ngay các khóa học đang mở.</p>
+      </div>
+      <ul id="category-grid" class="category-grid"></ul>
+    </section>
+
     <!-- ---------- Khóa học ---------- -->
     <section id="courses" class="public-main courses-section" aria-labelledby="courses-title">
       <div class="section-head">
@@ -81,16 +91,6 @@
 
       <div id="course-grid" class="course-grid" aria-live="polite"></div>
       <div id="pagination"></div>
-    </section>
-
-    <!-- ---------- Danh mục: lấy từ course_categories, chỉ hiện khi có lĩnh vực đang có khóa học (course-catalog.js) ---------- -->
-    <section id="danh-muc" class="categories-section" aria-labelledby="categories-title" hidden>
-      <div class="section-intro">
-        <p class="section-kicker">Danh mục</p>
-        <h2 id="categories-title" class="section-heading">Khám phá lĩnh vực bạn yêu thích</h2>
-        <p class="section-lead">Chọn một lĩnh vực để xem ngay các khóa học đang mở.</p>
-      </div>
-      <ul id="category-grid" class="category-grid"></ul>
     </section>
 
     <!-- ---------- Tính năng ---------- -->
@@ -150,6 +150,6 @@
     <p class="site-footer-copy">© Học Vèo · Nền tảng học trực tuyến</p>
   </footer>
 
-  <script type="module" src="js/course-catalog.js?v=202610171935"></script>
+  <script type="module" src="js/course-catalog.js?v=202610171951"></script>
 </body>
 </html>

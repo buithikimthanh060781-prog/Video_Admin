@@ -1,11 +1,11 @@
 // courses module: danh sách, tìm kiếm, lọc, phân trang, xuất bản/ẩn, xóa khóa học (chỉ ADMIN)
-import { supabase } from './supabase.js?v=202610171935';
-import { initLayout } from './layout.js?v=202610171935';
-import { confirmModal, createBadge, createPagedTable, showFlashToast, showToast } from './components.js?v=202610171935';
-import { BUCKETS, getPathFromPublicUrl, removeFiles } from './storage.js?v=202610171935';
-import { COURSE_STATUSES, getFriendlyCourseError, getPublishMissing, updateCourseStatus } from './course-utils.js?v=202610171935';
-import { duplicateCourse } from './course-duplicate.js?v=202610171935';
-import { createElement, debounce, escapeLikePattern, formatCurrency, formatDate } from './utils.js?v=202610171935';
+import { supabase } from './supabase.js?v=202610171951';
+import { initLayout } from './layout.js?v=202610171951';
+import { confirmModal, createBadge, createPagedTable, showFlashToast, showToast } from './components.js?v=202610171951';
+import { BUCKETS, getPathFromPublicUrl, removeFiles } from './storage.js?v=202610171951';
+import { COURSE_STATUSES, getFriendlyCourseError, getPublishMissing, updateCourseStatus } from './course-utils.js?v=202610171951';
+import { duplicateCourse } from './course-duplicate.js?v=202610171951';
+import { createElement, debounce, escapeLikePattern, formatCurrency, formatDate } from './utils.js?v=202610171951';
 
 const COLUMN_COUNT = 8;
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';

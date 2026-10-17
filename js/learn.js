@@ -1,16 +1,16 @@
 // learn module: trang học của học viên (learn.html?course=ID&lesson=ID)
 // Phát video bài học, đánh dấu bài đã học, chương đã xong, thanh % hoàn thành khóa học.
 // Quyền xem video do RLS (can_view_video) quyết định; trang chỉ hiển thị cho học viên ACTIVE (hoặc ADMIN, không lưu tiến độ).
-import { supabase } from './supabase.js?v=202610171935';
-import { initLayout } from './layout.js?v=202610171935';
-import { isAdmin } from './auth.js?v=202610171935';
-import { createBadge, createStateView, showToast } from './components.js?v=202610171935';
-import { fetchCourseSections } from './course-view.js?v=202610171935';
-import { fetchMyEnrollment } from './enrollment.js?v=202610171935';
-import { createIcon } from './icons.js?v=202610171935';
-import { renderPlayerInto } from './player.js?v=202610171935';
-import { computeProgress, createProgressBar } from './progress.js?v=202610171935';
-import { createElement } from './utils.js?v=202610171935';
+import { supabase } from './supabase.js?v=202610171951';
+import { initLayout } from './layout.js?v=202610171951';
+import { isAdmin } from './auth.js?v=202610171951';
+import { createBadge, createStateView, showToast } from './components.js?v=202610171951';
+import { fetchCourseSections } from './course-view.js?v=202610171951';
+import { fetchMyEnrollment } from './enrollment.js?v=202610171951';
+import { createIcon } from './icons.js?v=202610171951';
+import { renderPlayerInto } from './player.js?v=202610171951';
+import { computeProgress, createProgressBar } from './progress.js?v=202610171951';
+import { createElement } from './utils.js?v=202610171951';
 
 // Cùng khóa với watch.js: 1 lượt xem / video / 30 phút trên mỗi trình duyệt
 const VIEW_DEDUPE_MS = 30 * 60 * 1000;

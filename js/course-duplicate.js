@@ -1,9 +1,9 @@
 // Sao chép khóa học: thông tin, chương, bài học. KHÔNG sao chép file video (bài học trỏ cùng video gốc).
 // Bản sao luôn là DRAFT, có mã/slug mới và thumbnail riêng (copy file trong Storage).
-import { supabase } from './supabase.js?v=202610171935';
-import { BUCKETS, copyFile, getPathFromPublicUrl, getPublicUrl, removeFiles } from './storage.js?v=202610171935';
-import { generateCourseCode } from './course-utils.js?v=202610171935';
-import { slugify } from './utils.js?v=202610171935';
+import { supabase } from './supabase.js?v=202610171951';
+import { BUCKETS, copyFile, getPathFromPublicUrl, getPublicUrl, removeFiles } from './storage.js?v=202610171951';
+import { generateCourseCode } from './course-utils.js?v=202610171951';
+import { slugify } from './utils.js?v=202610171951';
 
 const TITLE_MAX_LENGTH = 200;
 const COPY_SUFFIX = ' (bản sao)';

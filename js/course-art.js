@@ -1,7 +1,7 @@
 // Ảnh minh họa theo lĩnh vực (SVG trong assets/images/categories).
 // Dùng cho thẻ danh mục ở trang chủ và làm ảnh dự phòng khi khóa học chưa có thumbnail hoặc ảnh lỗi.
 // Chỉ đổi ảnh hiển thị trên trình duyệt, KHÔNG ghi gì vào database.
-import { slugify } from './utils.js?v=202610171935';
+import { slugify } from './utils.js?v=202610171951';
 
 const ART_DIR = 'assets/images/categories';
 const DEFAULT_ART = `${ART_DIR}/general.svg`;

@@ -1,5 +1,5 @@
 // Hằng số + hàm dùng chung cho module khóa học (danh sách, chỉnh sửa)
-import { supabase } from './supabase.js?v=202610171935';
+import { supabase } from './supabase.js?v=202610171951';
 
 export const COURSE_STATUSES = {
   DRAFT: { label: 'Bản nháp', badge: 'warning' },

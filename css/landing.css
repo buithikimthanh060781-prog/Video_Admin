@@ -228,7 +228,8 @@ html { scroll-behavior: smooth; }
 /* =========================================================
    Danh mục: thẻ có ảnh minh họa theo lĩnh vực (assets/images/categories)
    ========================================================= */
-.categories-section { max-width: 1200px; margin: 0 auto; padding: 40px 20px 0; scroll-margin-top: 84px; }
+/* Ngay sau Hero (cách 56px); khu khóa học nằm ngay bên dưới */
+.categories-section { max-width: 1200px; margin: 0 auto; padding: 56px 20px 0; scroll-margin-top: 84px; }
 /* Desktop 4 cột, laptop 3, tablet 2 (≤ 600px: 2 cột gọn, ≤ 360px: 1 cột) */
 .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin: 32px 0 0; padding: 0; list-style: none; }
 .category-card {
@@ -389,7 +390,7 @@ html { scroll-behavior: smooth; }
   .landing-page .course-filters { padding: 10px; }
   .landing-page .course-filters input[type="search"],
   .landing-page .course-filters select { flex: 1 1 100%; }
-  .categories-section { padding: 32px 16px 0; }
+  .categories-section { padding: 40px 16px 0; }
   .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .category-card-body { padding: 10px 12px 12px; }
   .category-card-name { font-size: 15px; }

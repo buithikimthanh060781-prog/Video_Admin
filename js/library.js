@@ -1,8 +1,8 @@
 // library module: thư viện video đã công khai (USER và ADMIN đều xem được)
-import { supabase } from './supabase.js?v=202610171935';
-import { initLayout } from './layout.js?v=202610171935';
-import { createBadge, createPagedList, createStateView, showToast } from './components.js?v=202610171935';
-import { isYouTubeVideo } from './player.js?v=202610171935';
+import { supabase } from './supabase.js?v=202610171951';
+import { initLayout } from './layout.js?v=202610171951';
+import { createBadge, createPagedList, createStateView, showToast } from './components.js?v=202610171951';
+import { isYouTubeVideo } from './player.js?v=202610171951';
 import {
   createElement,
   debounce,
@@ -10,7 +10,7 @@ import {
   formatDate,
   formatDuration,
   formatNumber,
-} from './utils.js?v=202610171935';
+} from './utils.js?v=202610171951';
 
 const PAGE_SIZE_OPTIONS = [12, 24, 48];
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';

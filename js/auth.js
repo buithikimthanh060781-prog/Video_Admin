@@ -1,6 +1,6 @@
 // Authentication: Supabase Auth + kiểm tra session/role
-import { supabase } from './supabase.js?v=202610171935';
-import { setFlashToast } from './components.js?v=202610171935';
+import { supabase } from './supabase.js?v=202610171951';
+import { setFlashToast } from './components.js?v=202610171951';
 
 export const ROLE_ADMIN = 'ADMIN';
 // Trang chủ công khai; popup đăng nhập chỉ mở khi người dùng bấm nút "Đăng nhập"
