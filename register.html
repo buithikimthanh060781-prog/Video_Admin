@@ -5,45 +5,55 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <title>Register - Video Admin</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/auth.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <title>Đăng ký thành viên - Học Vèo</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/auth.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
 </head>
 <body data-auth-page="register">
   <main class="auth-page">
     <div class="auth-card">
-      <div class="auth-logo">Video Admin</div>
-      <h1 class="auth-title">Đăng ký</h1>
+      <a href="login.html" class="auth-back">← Về trang chủ</a>
+      <a href="login.html" class="auth-logo" aria-label="Học Vèo - Trang chủ">Học Vèo</a>
+      <h1 class="auth-title">Đăng ký thành viên</h1>
+      <p class="auth-subtitle">Sau khi đăng ký, tài khoản cần được quản trị viên kích hoạt trước khi đăng nhập và đăng ký học.</p>
       <form id="auth-form" class="auth-form" novalidate>
         <div class="form-message" role="alert" hidden></div>
         <fieldset>
           <div class="form-group">
-            <label for="username">Username</label>
-            <input id="username" name="username" type="text" autocomplete="username">
+            <label for="username">Tên đăng nhập</label>
+            <input id="username" name="username" type="text" autocomplete="username" placeholder="vd: Nguyễn Văn An" maxlength="50">
+            <small class="form-hint">Có thể dùng tiếng Việt có dấu, không trùng với thành viên khác</small>
             <small class="field-error" data-error-for="username"></small>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="ban@example.com">
             <small class="field-error" data-error-for="email"></small>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="phone">Số điện thoại</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="20" placeholder="vd: 0912 345 678">
+            <small class="form-hint">Quản trị viên liên hệ qua số này để kích hoạt tài khoản và khóa học</small>
+            <small class="field-error" data-error-for="phone"></small>
+          </div>
+          <div class="form-group">
+            <label for="password">Mật khẩu</label>
             <input id="password" name="password" type="password" autocomplete="new-password">
             <small class="field-error" data-error-for="password"></small>
           </div>
           <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
+            <label for="confirmPassword">Nhập lại mật khẩu</label>
             <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password">
             <small class="field-error" data-error-for="confirmPassword"></small>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
         </fieldset>
       </form>
-      <p class="auth-footer">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+      <p class="auth-footer">Đã có tài khoản? <a href="login.html" data-login-popup>Đăng nhập</a></p>
     </div>
   </main>
-  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/auth.js?v=202610171935"></script>
+  <script type="module" src="js/login-link.js?v=202610171935"></script>
 </body>
 </html>

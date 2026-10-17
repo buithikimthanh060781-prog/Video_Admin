@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <!-- Tài chính / đầu tư: dashboard biểu đồ + biểu đồ tròn + chồng xu -->
+  <rect width="640" height="360" fill="#fff7ed"/>
+  <circle cx="570" cy="330" r="150" fill="#ffedd5"/>
+  <circle cx="30" cy="20" r="100" fill="#ffedd5"/>
+
+  <!-- Dashboard -->
+  <rect x="84" y="66" width="330" height="244" rx="20" fill="#172554" opacity="0.06"/>
+  <rect x="80" y="56" width="330" height="244" rx="20" fill="#ffffff" stroke="#fed7aa" stroke-width="2"/>
+  <circle cx="108" cy="84" r="9" fill="#f97316"/>
+  <rect x="124" y="79" width="90" height="10" rx="5" fill="#172554"/>
+  <rect x="330" y="77" width="56" height="16" rx="8" fill="#dcfce7"/>
+  <path d="M348 89 L356 81 L364 89" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M104 130 H386 M104 170 H386 M104 210 H386 M104 250 H386" stroke="#f1f5f9" stroke-width="2"/>
+  <rect x="116" y="210" width="26" height="60" rx="6" fill="#1e3a8a"/>
+  <rect x="160" y="180" width="26" height="90" rx="6" fill="#172554"/>
+  <rect x="204" y="196" width="26" height="74" rx="6" fill="#1e3a8a"/>
+  <rect x="248" y="150" width="26" height="120" rx="6" fill="#172554"/>
+  <rect x="292" y="166" width="26" height="104" rx="6" fill="#1e3a8a"/>
+  <rect x="336" y="120" width="26" height="150" rx="6" fill="#f97316"/>
+  <line x1="104" y1="270" x2="386" y2="270" stroke="#e2e8f0" stroke-width="2"/>
+  <polyline points="129,192 173,162 217,178 261,132 305,148 349,100" fill="none" stroke="#f97316" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <g fill="#ffffff" stroke="#f97316" stroke-width="3">
+    <circle cx="129" cy="192" r="5"/>
+    <circle cx="173" cy="162" r="5"/>
+    <circle cx="217" cy="178" r="5"/>
+    <circle cx="261" cy="132" r="5"/>
+    <circle cx="305" cy="148" r="5"/>
+    <circle cx="349" cy="100" r="5"/>
+  </g>
+
+  <!-- Biểu đồ tròn -->
+  <rect x="436" y="56" width="150" height="150" rx="20" fill="#ffffff" stroke="#fed7aa" stroke-width="2"/>
+  <circle cx="511" cy="131" r="42" fill="none" stroke="#e2e8f0" stroke-width="18"/>
+  <circle cx="511" cy="131" r="42" fill="none" stroke="#172554" stroke-width="18" stroke-dasharray="158 106" transform="rotate(-90 511 131)"/>
+  <circle cx="511" cy="131" r="42" fill="none" stroke="#f97316" stroke-width="18" stroke-dasharray="66 198" stroke-dashoffset="-158" transform="rotate(-90 511 131)"/>
+
+  <!-- Chồng xu -->
+  <rect x="471" y="236" width="80" height="54" fill="#ea580c"/>
+  <ellipse cx="511" cy="290" rx="40" ry="12" fill="#ea580c"/>
+  <path d="M471 254 A40 12 0 0 0 551 254 M471 272 A40 12 0 0 0 551 272" fill="none" stroke="#c2410c" stroke-width="2"/>
+  <ellipse cx="511" cy="236" rx="40" ry="12" fill="#fb923c"/>
+  <ellipse cx="511" cy="236" rx="27" ry="7" fill="none" stroke="#fdba74" stroke-width="2"/>
+</svg>

@@ -1,13 +1,31 @@
 // Authentication: Supabase Auth + kiểm tra session/role
-import { supabase } from './supabase.js';
+import { supabase } from './supabase.js?v=202610171935';
+import { setFlashToast } from './components.js?v=202610171935';
 
 export const ROLE_ADMIN = 'ADMIN';
+// Trang chủ công khai; popup đăng nhập chỉ mở khi người dùng bấm nút "Đăng nhập"
 export const LOGIN_PAGE = 'login.html';
 export const ADMIN_HOME = 'index.html';
-export const USER_HOME = 'library.html';
+// Thành viên vào thẳng danh sách khóa học sau khi đăng nhập
+export const USER_HOME = 'explore.html';
+
+// Nhãn tiếng Việt cho vai trò và trạng thái tài khoản (profiles.role / profiles.status)
+export const ROLE_LABELS = {
+  ADMIN: { label: 'Quản trị viên', badge: 'primary' },
+  USER: { label: 'Thành viên', badge: 'default' },
+};
+// PENDING: vừa đăng ký, chờ quản trị viên kích hoạt · ACTIVE: được dùng · INACTIVE: đã bị ngừng kích hoạt
+export const MEMBER_STATUSES = {
+  PENDING: { label: 'Chờ kích hoạt', badge: 'warning' },
+  ACTIVE: { label: 'Đang hoạt động', badge: 'success' },
+  INACTIVE: { label: 'Ngừng hoạt động', badge: 'danger' },
+};
 
 const MIN_PASSWORD_LENGTH = 6;
-const USERNAME_PATTERN = /^[a-zA-Z0-9_]{3,30}$/;
+// Tên đăng nhập: không giới hạn ký tự (tiếng Việt có dấu, khoảng trắng...), chỉ cần không trống và không trùng
+const USERNAME_MAX_LENGTH = 50;
+// Số điện thoại: khớp ràng buộc profiles_phone_format (database/15_member_phone.sql)
+export const PHONE_PATTERN = /^[0-9+ .()-]{8,20}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // ---------- Error messages (không lộ lỗi nội bộ) ----------
@@ -15,7 +33,8 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export function getFriendlyAuthError(error) {
   const message = (error?.message || '').toLowerCase();
   if (message.includes('invalid login credentials')) return 'Email hoặc mật khẩu không đúng.';
-  if (message.includes('email not confirmed')) return 'Email chưa được xác nhận. Vui lòng kiểm tra hộp thư.';
+  // Chưa xác nhận email = chưa được ADMIN kích hoạt (kích hoạt sẽ xác nhận email, xem 14_member_activation.sql)
+  if (message.includes('email not confirmed')) return PENDING_MESSAGE;
   if (message.includes('already registered')) return 'Email đã được sử dụng.';
   if (message.includes('rate limit') || error?.status === 429) return 'Bạn thao tác quá nhanh. Vui lòng thử lại sau.';
   if (message.includes('same as the old')) return 'Mật khẩu mới phải khác mật khẩu cũ.';
@@ -54,11 +73,19 @@ export function isAdmin(profile) {
   return profile?.role === ROLE_ADMIN && isActive(profile);
 }
 
+// Chỉ tài khoản đã được quản trị viên kích hoạt mới dùng được (PENDING / INACTIVE thì không)
 export function isActive(profile) {
-  return profile?.status !== 'INACTIVE';
+  return profile?.status === 'ACTIVE';
 }
 
-const INACTIVE_MESSAGE = 'Tài khoản đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.';
+const PENDING_MESSAGE = 'Tài khoản của bạn đang chờ quản trị viên kích hoạt. Vui lòng quay lại sau khi được kích hoạt.';
+const INACTIVE_MESSAGE = 'Tài khoản đã bị ngừng kích hoạt. Vui lòng liên hệ quản trị viên.';
+const REGISTER_PENDING_MESSAGE = 'Đăng ký thành công! Tài khoản của bạn đang chờ quản trị viên kích hoạt. Sau khi được kích hoạt, bạn đăng nhập để đăng ký khóa học.';
+const REGISTER_TOAST_DURATION = 9000;
+
+function getInactiveMessage(profile) {
+  return profile?.status === 'PENDING' ? PENDING_MESSAGE : INACTIVE_MESSAGE;
+}
 
 export function getHomePage(profile) {
   return isAdmin(profile) ? ADMIN_HOME : USER_HOME;
@@ -98,12 +125,12 @@ export async function isUsernameAvailable(username) {
 }
 
 // Role không được gửi từ frontend: database trigger luôn tạo profile với role USER.
-export async function signUp({ username, email, password }) {
+export async function signUp({ username, email, password, phone }) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      data: { username },
+      data: { username, phone },
       emailRedirectTo: new URL(LOGIN_PAGE, location.href).href,
     },
   });
@@ -201,13 +228,17 @@ function validatePasswordConfirm(form, password, confirmPassword) {
 
 // ---------- Pages ----------
 
-async function initLoginPage(form) {
-  const session = await getSession();
-  if (session) {
-    const profile = await getCurrentProfile(session.user.id);
-    if (profile && isActive(profile)) return location.replace(getHomePage(profile));
-    if (profile) await clearSession();
-  }
+// Gắn xử lý đăng nhập cho form (dùng trong popup đăng nhập, xem login-modal.js).
+// Form cần: input email + password, .form-message, [data-error-for], button[type=submit].
+export function bindLoginForm(form) {
+  // DEV ONLY: nút "Điền" trong khối tài khoản demo (xóa cùng khối trong login-modal.js trước khi lên production)
+  form.querySelectorAll('[data-demo-email]').forEach((button) => {
+    button.addEventListener('click', () => {
+      clearFormErrors(form);
+      form.elements.email.value = button.dataset.demoEmail;
+      form.elements.password.value = button.dataset.demoPassword;
+    });
+  });
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -225,7 +256,7 @@ async function initLoginPage(form) {
       if (!profile) throw new Error('profile not found');
       if (!isActive(profile)) {
         await clearSession();
-        showFormMessage(form, INACTIVE_MESSAGE);
+        showFormMessage(form, getInactiveMessage(profile));
         setSubmitting(form, false);
         return;
       }
@@ -237,31 +268,48 @@ async function initLoginPage(form) {
   });
 }
 
-async function validateRegisterForm(form, { username, email, password, confirmPassword }) {
+async function validateRegisterForm(form, { username, email, phone, password, confirmPassword }) {
   let isValid = true;
-  if (!USERNAME_PATTERN.test(username)) {
-    setFieldError(form, 'username', 'Username 3–30 ký tự, chỉ gồm chữ, số và dấu _.');
+  if (!username) {
+    setFieldError(form, 'username', 'Vui lòng nhập tên đăng nhập.');
+    isValid = false;
+  } else if (username.length > USERNAME_MAX_LENGTH) {
+    setFieldError(form, 'username', `Tên đăng nhập tối đa ${USERNAME_MAX_LENGTH} ký tự.`);
     isValid = false;
   }
   isValid = validateEmail(form, email) && isValid;
+  if (!PHONE_PATTERN.test(phone)) {
+    setFieldError(form, 'phone', phone ? 'Số điện thoại không hợp lệ (8–20 chữ số).' : 'Vui lòng nhập số điện thoại.');
+    isValid = false;
+  }
   isValid = validatePassword(form, 'password', password) && isValid;
   isValid = validatePasswordConfirm(form, password, confirmPassword) && isValid;
   if (!isValid) return false;
 
   if (!(await isUsernameAvailable(username))) {
-    setFieldError(form, 'username', 'Username đã được sử dụng.');
+    setFieldError(form, 'username', 'Tên đăng nhập đã được sử dụng.');
     return false;
   }
   return true;
 }
 
-function initRegisterPage(form) {
+// Mặc định (trang register.html): về trang chủ login.html và hiện thông báo ở đó
+function redirectHomeWithMessage(message) {
+  setFlashToast(message, 'success', REGISTER_TOAST_DURATION);
+  location.replace(LOGIN_PAGE);
+}
+
+// Gắn xử lý đăng ký cho form (trang register.html và popup đăng ký register-modal.js).
+// Form cần: input username, email, password, confirmPassword, .form-message, [data-error-for], button[type=submit].
+// onSuccess(message, duration): gọi khi đăng ký xong (tài khoản ở trạng thái chờ kích hoạt).
+export function bindRegisterForm(form, { onSuccess = redirectHomeWithMessage } = {}) {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     clearFormErrors(form);
     const values = {
       username: form.elements.username.value.trim(),
       email: form.elements.email.value.trim(),
+      phone: form.elements.phone.value.trim(),
       password: form.elements.password.value,
       confirmPassword: form.elements.confirmPassword.value,
     };
@@ -270,12 +318,10 @@ function initRegisterPage(form) {
     try {
       if (!(await validateRegisterForm(form, values))) return;
       const { session } = await signUp(values);
-      if (session) {
-        location.replace(USER_HOME);
-        return;
-      }
+      // Tài khoản mới chờ ADMIN kích hoạt: không giữ phiên đăng nhập
+      if (session) await clearSession();
       form.reset();
-      showFormMessage(form, 'Đăng ký thành công! Vui lòng kiểm tra email để xác nhận tài khoản.', 'success');
+      onSuccess(REGISTER_PENDING_MESSAGE, REGISTER_TOAST_DURATION);
     } catch (error) {
       showFormMessage(form, getFriendlyAuthError(error));
     } finally {
@@ -295,7 +341,7 @@ function initForgotPasswordPage(form) {
     try {
       await sendResetPasswordEmail(email);
       form.reset();
-      showFormMessage(form, 'Nếu email tồn tại, link đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư.', 'success');
+      showFormMessage(form, 'Nếu email tồn tại, đường dẫn đặt lại mật khẩu đã được gửi. Vui lòng kiểm tra hộp thư.', 'success');
     } catch (error) {
       showFormMessage(form, getFriendlyAuthError(error));
     } finally {
@@ -308,7 +354,7 @@ async function initResetPasswordPage(form) {
   const session = await getSession();
   if (!session) {
     form.querySelector('fieldset').disabled = true;
-    showFormMessage(form, 'Link đặt lại mật khẩu không hợp lệ hoặc đã hết hạn. Vui lòng yêu cầu link mới.');
+    showFormMessage(form, 'Đường dẫn đặt lại mật khẩu không hợp lệ hoặc đã hết hạn. Vui lòng yêu cầu đường dẫn mới.');
     return;
   }
 
@@ -336,8 +382,7 @@ async function initResetPasswordPage(form) {
 }
 
 const PAGE_INITIALIZERS = {
-  login: initLoginPage,
-  register: initRegisterPage,
+  register: (form) => bindRegisterForm(form),
   'forgot-password': initForgotPasswordPage,
   'reset-password': initResetPasswordPage,
 };

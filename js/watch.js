@@ -1,9 +1,9 @@
 // watch module: xem 1 video đã công khai + ghi nhận lượt xem + video khác
-import { supabase } from './supabase.js';
-import { initLayout } from './layout.js';
-import { createBadge, createStateView } from './components.js';
-import { isYouTubeVideo, renderPlayerInto } from './player.js';
-import { createElement, formatDate, formatDuration, formatNumber } from './utils.js';
+import { supabase } from './supabase.js?v=202610171935';
+import { initLayout } from './layout.js?v=202610171935';
+import { createBadge, createStateView } from './components.js?v=202610171935';
+import { isYouTubeVideo, renderPlayerInto } from './player.js?v=202610171935';
+import { createElement, formatDate, formatDuration, formatNumber } from './utils.js?v=202610171935';
 
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';
 const RELATED_LIMIT = 6;
@@ -97,7 +97,7 @@ function renderViews(views) {
 }
 
 function renderVideoInfo(video) {
-  document.title = `${video.title} - Video Admin`;
+  document.title = `${video.title} - Học Vèo`;
   elements.title.textContent = video.title;
   const categoryName = video.video_categories?.name;
   elements.category.replaceChildren(...(categoryName ? [createBadge(categoryName, 'primary')] : []));
@@ -200,7 +200,7 @@ async function loadWatchPage(profile) {
 }
 
 async function initWatchPage() {
-  const profile = await initLayout('Watch', { adminOnly: false });
+  const profile = await initLayout('Xem video', { adminOnly: false });
   if (!profile) return;
   cacheElements();
   await loadWatchPage(profile);

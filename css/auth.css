@@ -16,11 +16,27 @@
 }
 
 .auth-logo {
+  display: block;
   text-align: center;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
   margin-bottom: 8px;
 }
+a.auth-logo:hover { color: var(--color-primary-hover); }
+
+/* Link quay về trang chủ (login.html) ở đầu thẻ */
+.auth-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  margin: -12px 0 8px -8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+}
+.auth-back:hover { color: var(--color-primary-strong); background: var(--color-primary-soft); }
 
 .auth-title { margin: 0 0 8px; font-size: 22px; text-align: center; }
 
@@ -42,4 +58,89 @@
   margin: 20px 0 0;
   text-align: center;
   color: var(--color-text-secondary);
+}
+
+/* DEV ONLY: khối tài khoản demo trên trang đăng nhập */
+.demo-accounts {
+  margin-top: 24px;
+  padding: 12px;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+
+.demo-accounts-title { margin: 0 0 8px; font-size: 13px; color: var(--color-text-secondary); }
+
+.demo-accounts-table { width: 100%; border-collapse: collapse; }
+
+.demo-accounts-table th,
+.demo-accounts-table td { padding: 6px 4px; text-align: left; vertical-align: middle; overflow-wrap: anywhere; }
+
+.demo-accounts-table th { color: var(--color-text-secondary); font-weight: 600; }
+
+/* =========================================================
+   Popup đăng nhập 2 cột (login-modal.js) — dùng ở trang chủ, chi tiết khóa học, đăng ký, quên mật khẩu
+   ========================================================= */
+/* Cuộn dọc được khi màn hình thấp (popup đăng ký có 4 ô nhập) */
+.modal.modal-auth { position: relative; max-width: 820px; overflow-x: hidden; overflow-y: auto; }
+.modal-auth .modal-header { position: absolute; top: 10px; right: 10px; z-index: 2; padding: 0; border: none; }
+.modal-auth .modal-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.modal-auth .modal-body { padding: 0; }
+
+.auth-split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); min-height: 460px; }
+
+/* Cột trái navy: tạo cảm giác tin cậy, điểm nhấn cam ở icon */
+.auth-aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 32px;
+  color: #fff;
+  background: var(--gradient-navy);
+}
+.auth-aside-badge { align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); color: var(--color-highlight); font-size: 12px; font-weight: 600; }
+.auth-aside-title { margin: 0; font-size: 26px; line-height: 1.25; letter-spacing: -0.01em; color: #fff; }
+.auth-aside-text { margin: 0; color: #cbd5e1; line-height: 1.6; }
+.auth-aside-list { display: flex; flex-direction: column; gap: 10px; margin: 8px 0 0; padding: 0; list-style: none; }
+.auth-aside-list li { display: flex; align-items: center; gap: 10px; }
+.auth-aside-list .icon { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; color: var(--color-on-primary); background: var(--color-primary); }
+
+.auth-main { display: flex; flex-direction: column; justify-content: center; padding: 40px 36px 28px; }
+.auth-main-title { margin: 0; font-size: 24px; letter-spacing: -0.01em; }
+.auth-main-subtitle { margin: 6px 0 0; color: var(--color-text-secondary); }
+.auth-main .auth-form { margin-top: 20px; }
+.auth-main .form-group input { padding: 11px 12px; font-size: 15px; }
+.auth-main .btn-block { min-height: 48px; font-size: 16px; }
+.auth-main .auth-footer { margin-top: 16px; }
+.auth-main .demo-accounts { margin-top: 18px; }
+
+/* Ô mật khẩu có nút hiện/ẩn */
+.input-action { position: relative; display: flex; }
+.input-action input { flex: 1; padding-right: 48px !important; }
+.input-action-button {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-secondary);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.input-action-button:hover { background: var(--color-surface); color: var(--color-text); }
+.input-action-button[aria-pressed="true"] { color: var(--color-primary-strong); }
+
+@media (max-width: 720px) {
+  .auth-split { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .auth-aside { display: none; }
+  .auth-main { padding: 36px 20px 20px; }
 }

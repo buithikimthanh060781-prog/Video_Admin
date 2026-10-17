@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Khóa học - Học Vèo</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
+  <link rel="stylesheet" href="css/courses.css?v=202610171935">
+  <link rel="stylesheet" href="css/landing.css?v=202610171935">
+  <link rel="stylesheet" href="css/learning.css?v=202610171935">
+</head>
+<body class="auth-pending" data-layout="app">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <div class="page-intro">
+          <div>
+            <h2 class="page-intro-title">Tất cả khóa học</h2>
+            <p class="text-secondary">Chọn khóa học bạn quan tâm, xem đề cương và bấm Đăng ký để được kích hoạt.</p>
+          </div>
+          <a href="my-courses.html" class="btn btn-secondary">Khóa học của tôi</a>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-filters">
+            <input type="search" id="search-input" placeholder="Tìm khóa học..." aria-label="Tìm khóa học">
+            <select id="category-filter" aria-label="Lọc theo lĩnh vực">
+              <option value="">Tất cả lĩnh vực</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="course-grid" class="course-grid"></div>
+        <div id="pagination"></div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/course-catalog.js?v=202610171935"></script>
+</body>
+</html>

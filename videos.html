@@ -5,9 +5,9 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <title>Videos - Video Admin</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <title>Quản lý video - Học Vèo</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
 </head>
 <body class="auth-pending">
   <div class="admin-layout">
@@ -18,32 +18,32 @@
         <section class="card">
           <div class="toolbar">
             <div class="toolbar-filters">
-              <input type="search" id="search-input" placeholder="Tìm theo title..." aria-label="Tìm theo title">
-              <select id="category-filter" aria-label="Lọc theo category">
-                <option value="">Tất cả category</option>
+              <input type="search" id="search-input" placeholder="Tìm theo tiêu đề..." aria-label="Tìm theo tiêu đề">
+              <select id="category-filter" aria-label="Lọc theo danh mục">
+                <option value="">Tất cả danh mục</option>
               </select>
-              <select id="status-filter" aria-label="Lọc theo status">
-                <option value="">Tất cả status</option>
-                <option value="PUBLISHED">Published</option>
-                <option value="DRAFT">Draft</option>
-                <option value="HIDDEN">Hidden</option>
+              <select id="status-filter" aria-label="Lọc theo trạng thái">
+                <option value="">Tất cả trạng thái</option>
+                <option value="PUBLISHED">Công khai</option>
+                <option value="DRAFT">Bản nháp</option>
+                <option value="HIDDEN">Ẩn</option>
               </select>
             </div>
-            <a href="video-edit.html" class="btn btn-primary">+ Add Video</a>
+            <a href="video-edit.html" class="btn btn-primary">+ Thêm video</a>
           </div>
 
           <div class="table-wrapper">
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Thumbnail</th>
-                  <th>Title</th>
-                  <th>Category</th>
-                  <th class="text-right">Views</th>
-                  <th>Status</th>
-                  <th>Created At</th>
-                  <th>Actions</th>
+                  <th>Mã</th>
+                  <th>Ảnh bìa</th>
+                  <th>Tiêu đề</th>
+                  <th>Danh mục</th>
+                  <th class="text-right">Lượt xem</th>
+                  <th>Trạng thái</th>
+                  <th>Ngày tạo</th>
+                  <th>Thao tác</th>
                 </tr>
               </thead>
               <tbody id="videos-body"></tbody>
@@ -55,6 +55,6 @@
       </main>
     </div>
   </div>
-  <script type="module" src="js/videos.js"></script>
+  <script type="module" src="js/videos.js?v=202610171935"></script>
 </body>
 </html>

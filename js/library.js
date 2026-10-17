@@ -1,8 +1,8 @@
 // library module: thư viện video đã công khai (USER và ADMIN đều xem được)
-import { supabase } from './supabase.js';
-import { initLayout } from './layout.js';
-import { createBadge, createPagedList, createStateView, showToast } from './components.js';
-import { isYouTubeVideo } from './player.js';
+import { supabase } from './supabase.js?v=202610171935';
+import { initLayout } from './layout.js?v=202610171935';
+import { createBadge, createPagedList, createStateView, showToast } from './components.js?v=202610171935';
+import { isYouTubeVideo } from './player.js?v=202610171935';
 import {
   createElement,
   debounce,
@@ -10,7 +10,7 @@ import {
   formatDate,
   formatDuration,
   formatNumber,
-} from './utils.js';
+} from './utils.js?v=202610171935';
 
 const PAGE_SIZE_OPTIONS = [12, 24, 48];
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';
@@ -100,7 +100,7 @@ async function loadCategoryOptions() {
       elements.categoryFilter.appendChild(option);
     });
   } catch {
-    showToast('Không tải được danh sách category.', 'error');
+    showToast('Không tải được danh sách danh mục.', 'error');
   }
 }
 
@@ -118,7 +118,7 @@ function initFilters() {
 // ---------- Init ----------
 
 async function initLibraryPage() {
-  const profile = await initLayout('Library', { adminOnly: false });
+  const profile = await initLayout('Thư viện video', { adminOnly: false });
   if (!profile) return;
 
   elements.grid = document.getElementById('video-grid');

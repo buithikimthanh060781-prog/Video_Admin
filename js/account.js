@@ -1,7 +1,8 @@
-// account module: thông tin cá nhân + avatar (ADMIN và USER đều truy cập được)
-import { supabase } from './supabase.js';
-import { initLayout, createAvatar } from './layout.js';
-import { createBadge, showToast } from './components.js';
+// Trang Tài khoản: thông tin cá nhân + ảnh đại diện (ADMIN và USER đều truy cập được)
+import { supabase } from './supabase.js?v=202610171935';
+import { MEMBER_STATUSES, ROLE_LABELS } from './auth.js?v=202610171935';
+import { initLayout, createAvatar } from './layout.js?v=202610171935';
+import { createBadge, showToast } from './components.js?v=202610171935';
 import {
   BUCKETS,
   FILE_RULES,
@@ -12,11 +13,8 @@ import {
   removeFiles,
   uploadFile,
   validateFile,
-} from './storage.js';
-import { formatDate } from './utils.js';
-
-const ROLE_BADGES = { ADMIN: 'primary', USER: 'default' };
-const STATUS_BADGES = { ACTIVE: 'success', INACTIVE: 'danger' };
+} from './storage.js?v=202610171935';
+import { formatDate } from './utils.js?v=202610171935';
 
 let profile = null;
 const elements = {};
@@ -40,7 +38,7 @@ function replaceAvatar(target, className) {
   target.replaceWith(Object.assign(createAvatar(profile, className), { id: target.id }));
 }
 
-// Cập nhật avatar ở trang Account và ở header
+// Cập nhật ảnh đại diện ở trang Tài khoản và ở header
 function renderAvatars() {
   replaceAvatar(document.getElementById('account-avatar'), 'avatar avatar-xl');
   document.querySelectorAll('.user-menu-trigger .avatar').forEach((avatar) => {
@@ -52,8 +50,10 @@ function renderAvatars() {
 function renderAccount() {
   document.getElementById('account-username').textContent = profile.username;
   document.getElementById('account-email').textContent = profile.email;
-  document.getElementById('account-role').replaceChildren(createBadge(profile.role, ROLE_BADGES[profile.role] || 'default'));
-  document.getElementById('account-status').replaceChildren(createBadge(profile.status, STATUS_BADGES[profile.status] || 'default'));
+  const role = ROLE_LABELS[profile.role] || { label: profile.role, badge: 'default' };
+  const status = MEMBER_STATUSES[profile.status] || { label: profile.status, badge: 'default' };
+  document.getElementById('account-role').replaceChildren(createBadge(role.label, role.badge));
+  document.getElementById('account-status').replaceChildren(createBadge(status.label, status.badge));
   document.getElementById('account-created-at').textContent = formatDate(profile.created_at);
   renderAvatars();
 }
@@ -62,7 +62,7 @@ function setBusy(isBusy) {
   elements.input.disabled = isBusy;
   elements.removeButton.disabled = isBusy;
   elements.uploadLabel.classList.toggle('is-disabled', isBusy);
-  elements.uploadLabel.textContent = isBusy ? 'Đang xử lý...' : 'Đổi avatar';
+  elements.uploadLabel.textContent = isBusy ? 'Đang xử lý...' : 'Đổi ảnh đại diện';
 }
 
 // ---------- Actions ----------
@@ -81,9 +81,9 @@ async function changeAvatar(file) {
     }
     await removeFiles(BUCKETS.avatars, [oldPath]);
     renderAvatars();
-    showToast('Đã cập nhật avatar.', 'success');
+    showToast('Đã cập nhật ảnh đại diện.', 'success');
   } catch (error) {
-    showToast(error?.name?.startsWith('Storage') ? getFriendlyStorageError(error) : 'Không thể cập nhật avatar.', 'error');
+    showToast(error?.name?.startsWith('Storage') ? getFriendlyStorageError(error) : 'Không thể cập nhật ảnh đại diện.', 'error');
   } finally {
     setBusy(false);
   }
@@ -96,9 +96,9 @@ async function removeAvatar() {
     profile.avatar_url = await updateAvatarUrl(null);
     await removeFiles(BUCKETS.avatars, [oldPath]);
     renderAvatars();
-    showToast('Đã xóa avatar.', 'success');
+    showToast('Đã xóa ảnh đại diện.', 'success');
   } catch {
-    showToast('Không thể xóa avatar.', 'error');
+    showToast('Không thể xóa ảnh đại diện.', 'error');
   } finally {
     setBusy(false);
   }
@@ -116,7 +116,7 @@ function handleAvatarSelected() {
 // ---------- Init ----------
 
 async function initAccountPage() {
-  profile = await initLayout('Account', { adminOnly: false });
+  profile = await initLayout('Tài khoản', { adminOnly: false });
   if (!profile) return;
 
   elements.input = document.getElementById('avatar-input');

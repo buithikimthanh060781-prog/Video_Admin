@@ -1,16 +1,52 @@
 // Layout dùng chung: Sidebar + Header + User menu + Mobile menu
-import { requireAuth, isAdmin, signOut, getHomePage } from './auth.js';
-import { createIcon } from './icons.js';
-import { showToast } from './components.js';
-import { createElement, debounce, getInitials } from './utils.js';
+import { supabase } from './supabase.js?v=202610171935';
+import { requireAuth, isAdmin, signOut, getHomePage } from './auth.js?v=202610171935';
+import { createIcon } from './icons.js?v=202610171935';
+import { createNotificationBell } from './notifications.js?v=202610171935';
+import { createElement, debounce, getInitials } from './utils.js?v=202610171935';
 
-const MENU_ITEMS = [
-  { href: 'index.html', label: 'Dashboard', icon: 'dashboard', adminOnly: true },
-  { href: 'videos.html', label: 'Videos', icon: 'video', adminOnly: true, activeFor: ['video-edit.html'] },
-  { href: 'categories.html', label: 'Categories', icon: 'category', adminOnly: true },
-  { href: 'users.html', label: 'Users', icon: 'users', adminOnly: true },
-  { href: 'library.html', label: 'Library', icon: 'play', adminOnly: false, activeFor: ['watch.html'] },
-  { href: 'account.html', label: 'Account', icon: 'account', adminOnly: false },
+const ENROLLMENTS_PAGE = 'enrollments.html';
+const USERS_PAGE = 'users.html';
+const ACCOUNT_PAGE = 'account.html';
+
+// Menu chia theo nhóm quản lý. title rỗng = không hiện tiêu đề nhóm.
+const MENU_GROUPS = [
+  {
+    title: '',
+    adminOnly: true,
+    items: [{ href: 'index.html', label: 'Tổng quan', icon: 'dashboard' }],
+  },
+  {
+    title: 'Quản lý khóa học',
+    adminOnly: true,
+    items: [
+      { href: 'courses.html', label: 'Khóa học', icon: 'course', activeFor: ['course-edit.html'] },
+      { href: 'course-categories.html', label: 'Lĩnh vực khóa học', icon: 'layers' },
+      { href: ENROLLMENTS_PAGE, label: 'Duyệt đăng ký học', icon: 'inbox' },
+    ],
+  },
+  {
+    title: 'Quản lý video',
+    adminOnly: true,
+    items: [
+      { href: 'videos.html', label: 'Video', icon: 'video', activeFor: ['video-edit.html'] },
+      { href: 'categories.html', label: 'Danh mục video', icon: 'category' },
+    ],
+  },
+  {
+    title: 'Quản lý thành viên',
+    adminOnly: true,
+    items: [{ href: USERS_PAGE, label: 'Thành viên', icon: 'users' }],
+  },
+  {
+    title: 'Học tập',
+    adminOnly: false,
+    items: [
+      { href: 'explore.html', label: 'Khám phá khóa học', icon: 'compass', activeFor: ['explore-detail.html'] },
+      { href: 'my-courses.html', label: 'Khóa học của tôi', icon: 'graduation', activeFor: ['learn.html'] },
+      { href: 'library.html', label: 'Thư viện video', icon: 'play', activeFor: ['watch.html'] },
+    ],
+  },
 ];
 
 function getCurrentPage() {
@@ -34,10 +70,23 @@ function createMenuLink(item, currentPage) {
 function createLogoutButton() {
   const button = createElement('button', 'sidebar-link sidebar-logout');
   button.type = 'button';
-  button.title = 'Logout';
-  button.append(createIcon('logout'), createElement('span', 'sidebar-label', 'Logout'));
+  button.title = 'Đăng xuất';
+  button.append(createIcon('logout'), createElement('span', 'sidebar-label', 'Đăng xuất'));
   button.addEventListener('click', signOut);
   return button;
+}
+
+function createMenuGroup(group, currentPage, index) {
+  const section = createElement('div', 'sidebar-group');
+  if (group.title) {
+    const heading = createElement('p', 'sidebar-group-title sidebar-label', group.title);
+    heading.id = `sidebar-group-${index}`;
+    section.setAttribute('role', 'group');
+    section.setAttribute('aria-labelledby', heading.id);
+    section.appendChild(heading);
+  }
+  section.append(...group.items.map((item) => createMenuLink(item, currentPage)));
+  return section;
 }
 
 export function renderSidebar(profile) {
@@ -47,18 +96,45 @@ export function renderSidebar(profile) {
 
   const logo = createElement('a', 'sidebar-logo');
   logo.href = getHomePage(profile);
-  logo.append(createIcon('video', 22), createElement('span', 'sidebar-label', 'Video Admin'));
+  logo.append(createIcon('zap', 20), createElement('span', 'sidebar-label', 'Học Vèo'));
 
   const nav = createElement('nav', 'sidebar-nav');
   nav.setAttribute('aria-label', 'Menu chính');
-  MENU_ITEMS
-    .filter((item) => !item.adminOnly || isAdmin(profile))
-    .forEach((item) => nav.appendChild(createMenuLink(item, currentPage)));
+  MENU_GROUPS
+    .filter((group) => !group.adminOnly || isAdmin(profile))
+    .forEach((group, index) => nav.appendChild(createMenuGroup(group, currentPage, index)));
 
   const bottom = createElement('div', 'sidebar-bottom');
-  bottom.appendChild(createLogoutButton());
+  bottom.append(createMenuLink({ href: ACCOUNT_PAGE, label: 'Tài khoản', icon: 'account' }, currentPage), createLogoutButton());
 
   sidebar.replaceChildren(logo, nav, bottom);
+}
+
+function setSidebarBadge(href, count, ariaLabel) {
+  const link = document.querySelector(`.sidebar-link[href="${href}"]`);
+  if (!link) return;
+  link.querySelector('.sidebar-badge')?.remove();
+  if (!count) return;
+  const badge = createElement('span', 'sidebar-badge', count > 99 ? '99+' : String(count));
+  badge.setAttribute('aria-label', ariaLabel(count));
+  link.appendChild(badge);
+}
+
+async function countRows(table, status) {
+  const { count, error } = await supabase.from(table).select('id', { count: 'exact', head: true }).eq('status', status);
+  if (error) throw error;
+  return count ?? 0;
+}
+
+// Số việc đang chờ ADMIN xử lý, hiện cạnh menu: yêu cầu đăng ký học + thành viên chờ kích hoạt. Lỗi thì không hiện.
+export async function refreshPendingBadge() {
+  if (!document.querySelector(`.sidebar-link[href="${ENROLLMENTS_PAGE}"]`)) return;
+  const [enrollments, members] = await Promise.allSettled([
+    countRows('course_enrollments', 'PENDING'),
+    countRows('profiles', 'PENDING'),
+  ]);
+  if (enrollments.status === 'fulfilled') setSidebarBadge(ENROLLMENTS_PAGE, enrollments.value, (count) => `${count} yêu cầu chờ duyệt`);
+  if (members.status === 'fulfilled') setSidebarBadge(USERS_PAGE, members.value, (count) => `${count} thành viên chờ kích hoạt`);
 }
 
 // ---------- Mobile menu ----------
@@ -104,15 +180,6 @@ function createSearchBox(placeholder, onSearch) {
   return box;
 }
 
-function createNotificationButton() {
-  const button = createElement('button', 'icon-button');
-  button.type = 'button';
-  button.setAttribute('aria-label', 'Thông báo');
-  button.appendChild(createIcon('bell'));
-  button.addEventListener('click', () => showToast('Không có thông báo mới.', 'info'));
-  return button;
-}
-
 export function createAvatar(profile, className = 'avatar') {
   const avatar = createElement('span', className);
   if (profile?.avatar_url) {
@@ -138,11 +205,11 @@ function createUserDropdown(profile) {
     createElement('span', 'text-secondary', profile.email),
   );
 
-  const accountLink = createElement('a', 'user-dropdown-item', 'Account');
-  accountLink.href = 'account.html';
+  const accountLink = createElement('a', 'user-dropdown-item', 'Tài khoản');
+  accountLink.href = ACCOUNT_PAGE;
   accountLink.setAttribute('role', 'menuitem');
 
-  const logoutButton = createElement('button', 'user-dropdown-item text-danger', 'Logout');
+  const logoutButton = createElement('button', 'user-dropdown-item text-danger', 'Đăng xuất');
   logoutButton.type = 'button';
   logoutButton.setAttribute('role', 'menuitem');
   logoutButton.addEventListener('click', signOut);
@@ -193,10 +260,10 @@ export function renderHeader(title, profile, { searchPlaceholder = 'Tìm kiếm.
 
   const right = createElement('div', 'header-right');
   if (onSearch) right.appendChild(createSearchBox(searchPlaceholder, onSearch));
-  right.append(createNotificationButton(), createUserMenu(profile));
+  right.append(createNotificationBell(profile), createUserMenu(profile));
 
   header.replaceChildren(left, right);
-  document.title = `${title} - Video Admin`;
+  document.title = `${title} - Học Vèo`;
 }
 
 // Kiểm tra session + role rồi mới hiển thị layout. Trả về profile hoặc null (đã redirect).
@@ -205,6 +272,7 @@ export async function initLayout(title, { adminOnly = true, ...headerOptions } =
   const profile = await requireAuth({ adminOnly });
   if (!profile) return null;
   renderSidebar(profile);
+  if (isAdmin(profile)) refreshPendingBadge();
   renderHeader(title, profile, headerOptions);
   initMobileMenu();
   document.body.classList.remove('auth-pending');

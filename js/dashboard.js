@@ -1,13 +1,13 @@
-// dashboard module: thống kê, Top 10 videos, biểu đồ lượt xem
-import { supabase } from './supabase.js';
-import { initLayout } from './layout.js';
-import { createIcon } from './icons.js';
-import { createStateView, renderTableState, showToast } from './components.js';
-import { createElement, formatBytes, formatNumber } from './utils.js';
+// Trang Tổng quan: thống kê, 10 video xem nhiều nhất, biểu đồ lượt xem
+import { supabase } from './supabase.js?v=202610171935';
+import { initLayout } from './layout.js?v=202610171935';
+import { createIcon } from './icons.js?v=202610171935';
+import { createStateView, renderTableState, showToast } from './components.js?v=202610171935';
+import { createElement, formatBytes, formatNumber } from './utils.js?v=202610171935';
 
 const TOP_LIMIT = 10;
-const PRIMARY_COLOR = '#2563eb';
-const PRIMARY_SOFT = 'rgba(37, 99, 235, 0.12)';
+const PRIMARY_COLOR = '#ea580c';
+const PRIMARY_SOFT = 'rgba(234, 88, 12, 0.12)';
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';
 const TIMEZONE = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 
@@ -99,7 +99,7 @@ function renderTopChart(videos) {
     data: {
       labels: videos.map((video) => truncate(video.title)),
       datasets: [{
-        label: 'Views',
+        label: 'Lượt xem',
         data: videos.map((video) => video.views),
         backgroundColor: PRIMARY_COLOR,
         borderRadius: 6,
@@ -184,7 +184,7 @@ function renderViewsChart(rows, interval) {
     data: {
       labels: rows.map((row) => formatBucket(row.bucket, interval)),
       datasets: [{
-        label: 'Views',
+        label: 'Lượt xem',
         data: rows.map((row) => row.views),
         borderColor: PRIMARY_COLOR,
         backgroundColor: PRIMARY_SOFT,
@@ -267,7 +267,7 @@ const CHART_UNAVAILABLE = { message: 'Không tải được thư viện biểu �
 // ---------- Init ----------
 
 async function initDashboardPage() {
-  const profile = await initLayout('Dashboard');
+  const profile = await initLayout('Tổng quan');
   if (!profile) return;
 
   renderStatIcons();

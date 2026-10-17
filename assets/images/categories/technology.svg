@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <!-- Công nghệ / AI / lập trình: laptop hiển thị code + robot AI -->
+  <defs>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#93c5fd" opacity="0.35"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="360" fill="#172554"/>
+  <circle cx="560" cy="40" r="170" fill="#1e3a8a"/>
+  <circle cx="60" cy="340" r="120" fill="#1e3a8a" opacity="0.6"/>
+  <rect x="24" y="24" width="150" height="110" fill="url(#dots)"/>
+
+  <!-- Laptop -->
+  <rect x="110" y="70" width="290" height="188" rx="14" fill="#cbd5e1"/>
+  <rect x="122" y="82" width="266" height="164" rx="8" fill="#0b1437"/>
+  <g>
+    <rect x="140" y="102" width="40" height="9" rx="4.5" fill="#f97316"/>
+    <rect x="188" y="102" width="70" height="9" rx="4.5" fill="#93c5fd"/>
+    <rect x="266" y="102" width="46" height="9" rx="4.5" fill="#fdba74"/>
+    <rect x="158" y="122" width="90" height="9" rx="4.5" fill="#e2e8f0" opacity="0.7"/>
+    <rect x="256" y="122" width="40" height="9" rx="4.5" fill="#f97316"/>
+    <rect x="158" y="142" width="60" height="9" rx="4.5" fill="#93c5fd"/>
+    <rect x="226" y="142" width="100" height="9" rx="4.5" fill="#e2e8f0" opacity="0.5"/>
+    <rect x="176" y="162" width="80" height="9" rx="4.5" fill="#fdba74"/>
+    <rect x="264" y="162" width="50" height="9" rx="4.5" fill="#93c5fd"/>
+    <rect x="158" y="182" width="110" height="9" rx="4.5" fill="#e2e8f0" opacity="0.5"/>
+    <rect x="140" y="202" width="30" height="9" rx="4.5" fill="#f97316"/>
+    <rect x="178" y="202" width="64" height="9" rx="4.5" fill="#93c5fd"/>
+    <rect x="250" y="200" width="3" height="13" fill="#fdba74"/>
+  </g>
+  <path d="M86 258 H424 L440 276 A6 6 0 0 1 435 285 H75 A6 6 0 0 1 70 276 Z" fill="#94a3b8"/>
+  <rect x="86" y="258" width="338" height="8" fill="#cbd5e1"/>
+  <rect x="225" y="258" width="60" height="6" rx="3" fill="#94a3b8"/>
+
+  <!-- Bong bóng code -->
+  <rect x="404" y="26" width="66" height="42" rx="12" fill="#ffffff"/>
+  <path d="M424 38 L416 47 L424 56 M450 38 L458 47 L450 56 M441 35 L433 59" fill="none" stroke="#172554" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Robot AI -->
+  <line x1="505" y1="88" x2="505" y2="104" stroke="#fdba74" stroke-width="4"/>
+  <circle cx="505" cy="84" r="8" fill="#f97316"/>
+  <rect x="440" y="134" width="12" height="28" rx="6" fill="#ea580c"/>
+  <rect x="558" y="134" width="12" height="28" rx="6" fill="#ea580c"/>
+  <rect x="450" y="104" width="110" height="88" rx="26" fill="#f97316"/>
+  <rect x="464" y="120" width="82" height="56" rx="18" fill="#0b1437"/>
+  <circle cx="487" cy="145" r="9" fill="#fdba74"/>
+  <circle cx="523" cy="145" r="9" fill="#fdba74"/>
+  <path d="M490 162 Q505 171 520 162" fill="none" stroke="#fdba74" stroke-width="4" stroke-linecap="round"/>
+  <rect x="492" y="192" width="26" height="12" fill="#ea580c"/>
+  <path d="M466 228 C446 238 436 252 430 266" fill="none" stroke="#fb923c" stroke-width="14" stroke-linecap="round"/>
+  <path d="M544 228 C564 240 570 258 568 272" fill="none" stroke="#fb923c" stroke-width="14" stroke-linecap="round"/>
+  <rect x="462" y="204" width="86" height="82" rx="20" fill="#fb923c"/>
+  <rect x="480" y="222" width="50" height="34" rx="10" fill="#0b1437"/>
+  <circle cx="494" cy="239" r="6" fill="#16a34a"/>
+  <rect x="506" y="233" width="16" height="5" rx="2.5" fill="#fdba74"/>
+  <rect x="506" y="242" width="12" height="5" rx="2.5" fill="#93c5fd"/>
+
+  <!-- Lấp lánh -->
+  <path d="M600 220 Q603 230 612 233 Q603 236 600 246 Q597 236 588 233 Q597 230 600 220 Z" fill="#fdba74"/>
+  <path d="M70 180 Q72 187 79 189 Q72 191 70 198 Q68 191 61 189 Q68 187 70 180 Z" fill="#f97316"/>
+  <rect x="40" y="306" width="560" height="3" rx="1.5" fill="#334f9e" opacity="0.6"/>
+</svg>

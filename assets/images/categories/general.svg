@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <!-- Mặc định (lĩnh vực chưa có ảnh riêng): video bài giảng + mũ tốt nghiệp + chồng sách -->
+  <rect width="640" height="360" fill="#f8fafc"/>
+  <circle cx="560" cy="300" r="150" fill="#ffedd5"/>
+  <circle cx="60" cy="40" r="110" fill="#e0e7ff"/>
+
+  <!-- Trình phát video -->
+  <rect x="150" y="60" width="340" height="212" rx="20" fill="#172554"/>
+  <circle cx="420" cy="110" r="56" fill="#f97316" opacity="0.15"/>
+  <circle cx="320" cy="160" r="34" fill="#f97316"/>
+  <path d="M308 142 L338 160 L308 178 Z" fill="#0b1437"/>
+  <rect x="180" y="238" width="280" height="6" rx="3" fill="#ffffff" opacity="0.25"/>
+  <rect x="180" y="238" width="160" height="6" rx="3" fill="#f97316"/>
+  <circle cx="340" cy="241" r="7" fill="#ffffff"/>
+
+  <!-- Mũ tốt nghiệp -->
+  <path d="M436 88 V112 C456 126 484 126 504 112 V88 L470 102 Z" fill="#1e3a8a"/>
+  <path d="M470 50 L532 76 L470 102 L408 76 Z" fill="#0b1437"/>
+  <path d="M532 76 V108" stroke="#f97316" stroke-width="3"/>
+  <circle cx="532" cy="110" r="6" fill="#f97316"/>
+
+  <!-- Chồng sách -->
+  <rect x="88" y="270" width="124" height="22" rx="4" fill="#f97316"/>
+  <rect x="98" y="248" width="106" height="22" rx="4" fill="#172554"/>
+  <rect x="92" y="226" width="114" height="22" rx="4" fill="#fdba74"/>
+  <rect x="80" y="292" width="480" height="5" rx="2.5" fill="#0b1437" opacity="0.1"/>
+</svg>

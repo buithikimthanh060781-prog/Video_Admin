@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <!-- Thiết kế / đồ họa: artboard, đường cong bezier, bảng màu, bút chì, thước -->
+  <rect width="640" height="360" fill="#fffbeb"/>
+  <circle cx="590" cy="310" r="150" fill="#fef3c7"/>
+  <circle cx="50" cy="40" r="100" fill="#ffedd5"/>
+
+  <!-- Artboard -->
+  <rect x="150" y="48" width="300" height="232" rx="16" fill="#ffffff" stroke="#fde68a" stroke-width="2"/>
+  <circle cx="232" cy="132" r="46" fill="#f97316"/>
+  <rect x="304" y="96" width="80" height="80" rx="14" fill="#172554"/>
+  <rect x="294" y="86" width="100" height="100" fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="6 5"/>
+  <g fill="#ffffff" stroke="#f97316" stroke-width="2">
+    <rect x="289" y="81" width="10" height="10"/>
+    <rect x="389" y="81" width="10" height="10"/>
+    <rect x="289" y="181" width="10" height="10"/>
+    <rect x="389" y="181" width="10" height="10"/>
+  </g>
+  <path d="M182 246 C232 196 312 286 420 222" fill="none" stroke="#c2410c" stroke-width="4" stroke-linecap="round"/>
+  <path d="M182 246 L222 206 M420 222 L392 188" stroke="#94a3b8" stroke-width="2"/>
+  <g fill="#ffffff" stroke="#172554" stroke-width="2.5">
+    <rect x="176" y="240" width="12" height="12"/>
+    <rect x="414" y="216" width="12" height="12"/>
+  </g>
+  <circle cx="222" cy="206" r="5" fill="#172554"/>
+  <circle cx="392" cy="188" r="5" fill="#172554"/>
+
+  <!-- Bảng màu -->
+  <rect x="474" y="64" width="104" height="216" rx="20" fill="#ffffff" stroke="#fde68a" stroke-width="2"/>
+  <circle cx="526" cy="104" r="19" fill="#f97316"/>
+  <circle cx="526" cy="150" r="19" fill="#172554"/>
+  <circle cx="526" cy="196" r="19" fill="#facc15"/>
+  <circle cx="526" cy="242" r="19" fill="#16a34a"/>
+
+  <!-- Thước -->
+  <rect x="150" y="296" width="300" height="28" rx="6" fill="#fdba74"/>
+  <path d="M168 296v12M183 296v7M198 296v12M213 296v7M228 296v12M243 296v7M258 296v12M273 296v7M288 296v12M303 296v7M318 296v12M333 296v7M348 296v12M363 296v7M378 296v12M393 296v7M408 296v12M423 296v7M438 296v12" stroke="#9a3412" stroke-width="2"/>
+
+  <!-- Bút chì -->
+  <g transform="rotate(-40 110 250)">
+    <rect x="40" y="238" width="16" height="22" rx="3" fill="#172554"/>
+    <rect x="54" y="238" width="116" height="22" fill="#f97316"/>
+    <rect x="54" y="246" width="116" height="6" fill="#ea580c"/>
+    <path d="M170 238 L198 249 L170 260 Z" fill="#fde68a"/>
+    <path d="M189 245.5 L198 249 L189 252.5 Z" fill="#172554"/>
+  </g>
+</svg>

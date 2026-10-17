@@ -1,6 +1,6 @@
 // Reusable components: Toast, Modal, Pagination, Table states
-import { createElement } from './utils.js';
-import { createIcon } from './icons.js';
+import { createElement } from './utils.js?v=202610171935';
+import { createIcon } from './icons.js?v=202610171935';
 
 // ---------- Toast ----------
 
@@ -30,9 +30,9 @@ export function showToast(message, type = 'info', duration = 3000) {
 // Toast hiển thị ở trang kế tiếp (sau redirect)
 const FLASH_KEY = 'flash-toast';
 
-export function setFlashToast(message, type = 'success') {
+export function setFlashToast(message, type = 'success', duration = 3000) {
   try {
-    sessionStorage.setItem(FLASH_KEY, JSON.stringify({ message, type }));
+    sessionStorage.setItem(FLASH_KEY, JSON.stringify({ message, type, duration }));
   } catch {
     // sessionStorage không khả dụng: bỏ qua
   }
@@ -42,7 +42,7 @@ export function showFlashToast() {
   try {
     const flash = JSON.parse(sessionStorage.getItem(FLASH_KEY));
     sessionStorage.removeItem(FLASH_KEY);
-    if (flash?.message) showToast(flash.message, flash.type);
+    if (flash?.message) showToast(flash.message, flash.type, flash.duration);
   } catch {
     // dữ liệu hỏng hoặc không đọc được: bỏ qua
   }
@@ -122,10 +122,10 @@ export function openModal({ title, body, size, actions = [], onClose } = {}) {
 
 // Trả về Promise<boolean>
 export function confirmModal({
-  title = 'Delete video?',
-  message = 'This action cannot be undone.',
-  confirmText = 'Delete',
-  cancelText = 'Cancel',
+  title = 'Xác nhận xóa?',
+  message = 'Hành động này không thể hoàn tác.',
+  confirmText = 'Xóa',
+  cancelText = 'Hủy',
   variant = 'danger',
 } = {}) {
   return new Promise((resolve) => {

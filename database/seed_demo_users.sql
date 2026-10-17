@@ -45,5 +45,7 @@ $$;
 select pg_temp.create_demo_user('admin1@gmail.com', 'admin1', '123456');
 select pg_temp.create_demo_user('user1@gmail.com', 'user1', '123456');
 
--- Profile được trigger handle_new_user tạo với role USER; nâng admin1 lên ADMIN.
+-- Profile được trigger handle_new_user tạo với role USER (từ 14_member_activation.sql: status PENDING);
+-- nâng admin1 lên ADMIN và kích hoạt sẵn 2 tài khoản demo.
 update public.profiles set role = 'ADMIN' where email = 'admin1@gmail.com';
+update public.profiles set status = 'ACTIVE' where email in ('admin1@gmail.com', 'user1@gmail.com');

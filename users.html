@@ -5,9 +5,9 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <title>Users - Video Admin</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <title>Quản lý thành viên - Học Vèo</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
 </head>
 <body class="auth-pending">
   <div class="admin-layout">
@@ -15,19 +15,21 @@
     <div class="main">
       <header id="header" class="header"></header>
       <main id="content" class="content">
+        <p id="pending-members-note" class="pending-note" role="status" hidden></p>
         <section class="card">
           <div class="toolbar">
             <div class="toolbar-filters">
-              <input type="search" id="search-input" placeholder="Tìm theo username, email..." aria-label="Tìm theo username hoặc email">
-              <select id="role-filter" aria-label="Lọc theo role">
-                <option value="">Tất cả role</option>
-                <option value="ADMIN">ADMIN</option>
-                <option value="USER">USER</option>
+              <input type="search" id="search-input" placeholder="Tìm theo tên, email, số điện thoại..." aria-label="Tìm theo tên đăng nhập, email hoặc số điện thoại">
+              <select id="role-filter" aria-label="Lọc theo vai trò">
+                <option value="">Tất cả vai trò</option>
+                <option value="ADMIN">Quản trị viên</option>
+                <option value="USER">Thành viên</option>
               </select>
-              <select id="status-filter" aria-label="Lọc theo status">
-                <option value="">Tất cả status</option>
-                <option value="ACTIVE">Active</option>
-                <option value="INACTIVE">Inactive</option>
+              <select id="status-filter" aria-label="Lọc theo trạng thái">
+                <option value="">Tất cả trạng thái</option>
+                <option value="PENDING">Chờ kích hoạt</option>
+                <option value="ACTIVE">Đang hoạt động</option>
+                <option value="INACTIVE">Ngừng hoạt động</option>
               </select>
             </div>
           </div>
@@ -36,14 +38,15 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Avatar</th>
-                  <th>Username</th>
+                  <th>Mã</th>
+                  <th>Ảnh</th>
+                  <th>Tên đăng nhập</th>
                   <th>Email</th>
-                  <th>Role</th>
-                  <th>Created At</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>Số điện thoại</th>
+                  <th>Vai trò</th>
+                  <th>Ngày đăng ký</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
                 </tr>
               </thead>
               <tbody id="users-body"></tbody>
@@ -55,6 +58,6 @@
       </main>
     </div>
   </div>
-  <script type="module" src="js/users.js"></script>
+  <script type="module" src="js/users.js?v=202610171935"></script>
 </body>
 </html>

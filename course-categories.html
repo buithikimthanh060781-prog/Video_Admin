@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Lĩnh vực khóa học - Học Vèo</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
+  <link rel="stylesheet" href="css/courses.css?v=202610171935">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <nav class="breadcrumb" aria-label="Đường dẫn trang">
+          <span>Khóa học</span>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Lĩnh vực khóa học</span>
+        </nav>
+
+        <section class="card">
+          <div class="toolbar">
+            <div class="toolbar-filters">
+              <input type="search" id="search-input" placeholder="Tìm theo tên lĩnh vực..." aria-label="Tìm theo tên lĩnh vực">
+              <select id="status-filter" aria-label="Lọc theo trạng thái">
+                <option value="">Tất cả trạng thái</option>
+                <option value="active">Đang hiển thị</option>
+                <option value="inactive">Đang ẩn</option>
+              </select>
+            </div>
+            <button type="button" id="add-course-category" class="btn btn-primary">+ Thêm lĩnh vực</button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tên</th>
+                  <th>Đường dẫn (slug)</th>
+                  <th>Mô tả</th>
+                  <th class="text-right">Thứ tự</th>
+                  <th>Trạng thái</th>
+                  <th class="text-right">Khóa học</th>
+                  <th>Ngày tạo</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="course-categories-body"></tbody>
+            </table>
+          </div>
+
+          <div id="pagination"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/course-categories.js?v=202610171935"></script>
+</body>
+</html>

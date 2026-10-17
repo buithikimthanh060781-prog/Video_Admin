@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <!-- Marketing / bán hàng: loa, điện thoại bài đăng mạng xã hội, tương tác, tăng trưởng -->
+  <rect width="640" height="360" fill="#ffedd5"/>
+  <circle cx="320" cy="190" r="160" fill="#fff7ed"/>
+  <circle cx="610" cy="20" r="90" fill="#fed7aa" opacity="0.6"/>
+
+  <!-- Hashtag -->
+  <path d="M84 258 L76 310 M106 258 L98 310 M70 274 H116 M66 294 H112" fill="none" stroke="#172554" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Loa -->
+  <g transform="rotate(-12 150 170)">
+    <path d="M124 192 L134 238 H152 L144 198 Z" fill="#172554"/>
+    <rect x="88" y="146" width="28" height="48" rx="8" fill="#172554"/>
+    <path d="M112 150 L190 116 V224 L112 190 Z" fill="#f97316"/>
+    <rect x="184" y="110" width="16" height="120" rx="8" fill="#ea580c"/>
+  </g>
+  <path d="M216 138 Q230 168 216 198" fill="none" stroke="#c2410c" stroke-width="5" stroke-linecap="round"/>
+  <path d="M230 124 Q252 168 230 212" fill="none" stroke="#c2410c" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Điện thoại -->
+  <rect x="252" y="40" width="144" height="292" rx="26" fill="#172554"/>
+  <rect x="262" y="54" width="124" height="264" rx="18" fill="#ffffff"/>
+  <rect x="304" y="60" width="40" height="8" rx="4" fill="#172554"/>
+  <circle cx="281" cy="88" r="10" fill="#f97316"/>
+  <rect x="297" y="82" width="60" height="6" rx="3" fill="#172554"/>
+  <rect x="297" y="92" width="40" height="5" rx="2.5" fill="#cbd5e1"/>
+  <rect x="272" y="108" width="104" height="84" rx="10" fill="#ffedd5"/>
+  <circle cx="350" cy="130" r="10" fill="#f97316"/>
+  <path d="M276 188 L304 150 L328 176 L344 162 L372 188 Z" fill="#fdba74"/>
+  <path d="M286 222 C278 216 274 212 274 207 A6 6 0 0 1 286 205 A6 6 0 0 1 298 207 C298 212 294 216 286 222 Z" fill="#f97316"/>
+  <path d="M310 204 H330 V216 H318 L312 221 V216 H310 Z" fill="none" stroke="#172554" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M346 214 L358 206 L346 198 M358 206 H344 C340 206 338 210 338 214" fill="none" stroke="#172554" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="272" y="234" width="100" height="6" rx="3" fill="#cbd5e1"/>
+  <rect x="272" y="246" width="76" height="6" rx="3" fill="#e2e8f0"/>
+  <rect x="272" y="268" width="104" height="30" rx="15" fill="#f97316"/>
+  <rect x="300" y="280" width="48" height="6" rx="3" fill="#0b1437" opacity="0.8"/>
+
+  <!-- Tương tác -->
+  <circle cx="450" cy="92" r="32" fill="#ffffff"/>
+  <path d="M450 106 C436 96 430 90 430 82 A10 10 0 0 1 450 78 A10 10 0 0 1 470 82 C470 90 464 96 450 106 Z" fill="#f97316"/>
+  <circle cx="532" cy="116" r="28" fill="#172554"/>
+  <circle cx="532" cy="108" r="8" fill="#fdba74"/>
+  <path d="M518 130 A14 11 0 0 1 546 130 Z" fill="#fdba74"/>
+
+  <!-- Tăng trưởng -->
+  <rect x="430" y="196" width="160" height="116" rx="18" fill="#ffffff"/>
+  <rect x="450" y="270" width="20" height="24" rx="4" fill="#fdba74"/>
+  <rect x="478" y="254" width="20" height="40" rx="4" fill="#fdba74"/>
+  <rect x="506" y="236" width="20" height="58" rx="4" fill="#fb923c"/>
+  <rect x="534" y="216" width="20" height="78" rx="4" fill="#f97316"/>
+  <path d="M448 250 L480 232 L504 240 L556 210" fill="none" stroke="#172554" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M542 208 H558 V224" fill="none" stroke="#172554" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

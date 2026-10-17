@@ -5,9 +5,9 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <title>Categories - Video Admin</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <title>Danh mục video - Học Vèo</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
 </head>
 <body class="auth-pending">
   <div class="admin-layout">
@@ -18,22 +18,22 @@
         <section class="card">
           <div class="toolbar">
             <div class="toolbar-filters">
-              <input type="search" id="search-input" placeholder="Tìm theo tên category..." aria-label="Tìm theo tên category">
+              <input type="search" id="search-input" placeholder="Tìm theo tên danh mục..." aria-label="Tìm theo tên danh mục">
             </div>
-            <button type="button" id="add-category" class="btn btn-primary">+ Add Category</button>
+            <button type="button" id="add-category" class="btn btn-primary">+ Thêm danh mục</button>
           </div>
 
           <div class="table-wrapper">
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Slug</th>
-                  <th>Description</th>
-                  <th class="text-right">Videos</th>
-                  <th>Created At</th>
-                  <th>Actions</th>
+                  <th>Mã</th>
+                  <th>Tên</th>
+                  <th>Đường dẫn (slug)</th>
+                  <th>Mô tả</th>
+                  <th class="text-right">Số video</th>
+                  <th>Ngày tạo</th>
+                  <th>Thao tác</th>
                 </tr>
               </thead>
               <tbody id="categories-body"></tbody>
@@ -45,6 +45,6 @@
       </main>
     </div>
   </div>
-  <script type="module" src="js/categories.js"></script>
+  <script type="module" src="js/categories.js?v=202610171935"></script>
 </body>
 </html>

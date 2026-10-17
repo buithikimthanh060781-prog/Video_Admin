@@ -1,6 +1,6 @@
 // Supabase Storage helpers: validate, upload, public/signed URL, remove
-import { supabase, SUPABASE_URL } from './supabase.js';
-import { slugify } from './utils.js';
+import { supabase, SUPABASE_URL } from './supabase.js?v=202610171935';
+import { slugify } from './utils.js?v=202610171935';
 
 export const BUCKETS = {
   thumbnails: 'thumbnails',
@@ -44,7 +44,7 @@ export function validateFile(file, rules) {
     return `Định dạng không hợp lệ. Chỉ chấp nhận ${rules.label}.`;
   }
   if (file.size > rules.maxSize) {
-    return `File quá lớn. Tối đa ${Math.round(rules.maxSize / MB)} MB.`;
+    return `Tệp quá lớn. Tối đa ${Math.round(rules.maxSize / MB)} MB.`;
   }
   return '';
 }
@@ -66,6 +66,13 @@ export async function uploadFile(bucket, path, file) {
     .upload(path, file, { contentType: file.type, upsert: false, cacheControl: '3600' });
   if (error) throw error;
   return path;
+}
+
+// Sao chép file trong cùng bucket (dùng khi nhân bản khóa học để mỗi khóa học có thumbnail riêng)
+export async function copyFile(bucket, fromPath, toPath) {
+  const { error } = await supabase.storage.from(bucket).copy(fromPath, toPath);
+  if (error) throw error;
+  return toPath;
 }
 
 export function getPublicUrl(bucket, path) {
@@ -105,9 +112,9 @@ export async function removeFiles(bucket, paths) {
 export function getFriendlyStorageError(error) {
   const message = (error?.message || '').toLowerCase();
   if (message.includes('exceeded the maximum') || message.includes('too large') || error?.statusCode === '413') {
-    return 'File vượt quá dung lượng cho phép.';
+    return 'Tệp vượt quá dung lượng cho phép.';
   }
-  if (message.includes('mime type') || message.includes('invalid_mime_type')) return 'Định dạng file không được hỗ trợ.';
-  if (message.includes('row-level security') || message.includes('unauthorized')) return 'Bạn không có quyền upload file.';
-  return 'Upload file thất bại. Vui lòng thử lại.';
+  if (message.includes('mime type') || message.includes('invalid_mime_type')) return 'Định dạng tệp không được hỗ trợ.';
+  if (message.includes('row-level security') || message.includes('unauthorized')) return 'Bạn không có quyền tải tệp lên.';
+  return 'Tải tệp lên thất bại. Vui lòng thử lại.';
 }

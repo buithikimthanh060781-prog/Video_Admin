@@ -1,8 +1,8 @@
 // video-edit module: thêm mới (không có ?id) hoặc sửa video (?id=...)
 // Nguồn video: UPLOAD (file trong Storage) hoặc YOUTUBE (link nhúng)
-import { supabase } from './supabase.js';
-import { initLayout } from './layout.js';
-import { createStateView, setFlashToast } from './components.js';
+import { supabase } from './supabase.js?v=202610171935';
+import { initLayout } from './layout.js?v=202610171935';
+import { createStateView, setFlashToast } from './components.js?v=202610171935';
 import {
   BUCKETS,
   FILE_RULES,
@@ -15,7 +15,7 @@ import {
   removeFiles,
   uploadFile,
   validateFile,
-} from './storage.js';
+} from './storage.js?v=202610171935';
 import {
   VIDEO_SOURCES,
   buildYouTubeWatchUrl,
@@ -24,8 +24,8 @@ import {
   isYouTubeThumbnail,
   isYouTubeVideo,
   parseYouTubeVideoId,
-} from './player.js';
-import { createElement, debounce, formatBytes, formatDate, formatDuration, formatNumber, slugify } from './utils.js';
+} from './player.js?v=202610171935';
+import { createElement, debounce, formatBytes, formatDate, formatDuration, formatNumber, slugify } from './utils.js?v=202610171935';
 
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';
 const VALID_STATUSES = ['PUBLISHED', 'DRAFT', 'HIDDEN'];
@@ -94,10 +94,10 @@ function showFormMessage(message) {
   box.hidden = !message;
 }
 
-function setSubmitting(isSubmitting, text = 'Save') {
+function setSubmitting(isSubmitting, text = 'Lưu') {
   elements.fieldset.disabled = isSubmitting;
   elements.submitButton.disabled = isSubmitting;
-  elements.submitButton.textContent = isSubmitting ? text : 'Save';
+  elements.submitButton.textContent = isSubmitting ? text : 'Lưu';
 }
 
 function getSource() {
@@ -121,19 +121,19 @@ function getFormValues() {
 
 function validateYouTubeUrl(values) {
   if (parseYouTubeVideoId(values.youtubeUrl)) return '';
-  return values.youtubeUrl ? 'Link YouTube không hợp lệ.' : 'Vui lòng nhập link YouTube.';
+  return values.youtubeUrl ? 'Liên kết YouTube không hợp lệ.' : 'Vui lòng nhập liên kết YouTube.';
 }
 
 function validateVideoFile(values) {
   if (isEditMode) return '';
-  return values.videoFile ? validateFile(values.videoFile, FILE_RULES.video) : 'Vui lòng chọn file video.';
+  return values.videoFile ? validateFile(values.videoFile, FILE_RULES.video) : 'Vui lòng chọn tệp video.';
 }
 
 function validateForm(values) {
   const errors = {};
-  if (!values.title) errors.title = 'Vui lòng nhập title.';
-  else if (values.title.length > TITLE_MAX_LENGTH) errors.title = `Title tối đa ${TITLE_MAX_LENGTH} ký tự.`;
-  if (!values.categoryId) errors.category = 'Vui lòng chọn category.';
+  if (!values.title) errors.title = 'Vui lòng nhập tiêu đề.';
+  else if (values.title.length > TITLE_MAX_LENGTH) errors.title = `Tiêu đề tối đa ${TITLE_MAX_LENGTH} ký tự.`;
+  if (!values.categoryId) errors.category = 'Vui lòng chọn danh mục.';
   const thumbnailError = validateFile(values.thumbnailFile, FILE_RULES.thumbnail);
   if (thumbnailError) errors.thumbnail = thumbnailError;
 
@@ -249,13 +249,13 @@ async function buildSourceData(values, uploadedPaths) {
       duration: null,
     };
   }
-  setSubmitting(true, 'Đang upload video...');
+  setSubmitting(true, 'Đang tải video lên...');
   return { video_source: VIDEO_SOURCES.upload, ...(await uploadVideo(values.videoFile, uploadedPaths)) };
 }
 
 async function resolveNewThumbnail(values, uploadedPaths) {
   if (values.thumbnailFile) {
-    setSubmitting(true, 'Đang upload thumbnail...');
+    setSubmitting(true, 'Đang tải ảnh bìa lên...');
     return uploadThumbnail(values.thumbnailFile, uploadedPaths);
   }
   if (values.source === VIDEO_SOURCES.youtube) {
@@ -298,7 +298,7 @@ async function saveVideoChanges(values, uploadedPaths) {
   };
   if (isYouTubeVideo(currentVideo)) Object.assign(payload, getYouTubeChanges(values));
   if (values.thumbnailFile) {
-    setSubmitting(true, 'Đang upload thumbnail...');
+    setSubmitting(true, 'Đang tải ảnh bìa lên...');
     payload.thumbnail_url = await uploadThumbnail(values.thumbnailFile, uploadedPaths);
   }
   setSubmitting(true, 'Đang lưu...');
@@ -357,11 +357,11 @@ function renderCategoryOptions(categories) {
 
 function renderVideoMeta(video) {
   const items = [
-    ['Source', isYouTubeVideo(video) ? 'YouTube' : 'Upload'],
-    ['Views', formatNumber(video.views)],
-    ['File size', video.file_size ? formatBytes(video.file_size) : '—'],
-    ['Duration', formatDuration(video.duration)],
-    ['Created at', formatDate(video.created_at)],
+    ['Nguồn', isYouTubeVideo(video) ? 'YouTube' : 'Tải tệp lên'],
+    ['Lượt xem', formatNumber(video.views)],
+    ['Dung lượng tệp', video.file_size ? formatBytes(video.file_size) : '—'],
+    ['Thời lượng', formatDuration(video.duration)],
+    ['Ngày tạo', formatDate(video.created_at)],
   ];
   elements.videoMeta.replaceChildren(...items.flatMap(([label, value]) => [
     createElement('dt', '', label),
@@ -375,15 +375,15 @@ async function renderCurrentVideo(video) {
   elements.videoCurrentGroup.hidden = false;
   if (!video.storage_path) {
     elements.videoCurrentWrapper.hidden = true;
-    elements.videoCurrentHint.textContent = 'Video này chưa có file.';
+    elements.videoCurrentHint.textContent = 'Video này chưa có tệp.';
     return;
   }
-  elements.videoCurrentHint.textContent = 'File video không thay đổi khi chỉnh sửa.';
+  elements.videoCurrentHint.textContent = 'Tệp video không thay đổi khi chỉnh sửa.';
   try {
     elements.videoCurrent.src = await createSignedUrl(BUCKETS.videos, video.storage_path);
   } catch {
     elements.videoCurrentWrapper.hidden = true;
-    elements.videoCurrentHint.textContent = 'Không tải được video preview.';
+    elements.videoCurrentHint.textContent = 'Không tải được bản xem trước video.';
   }
 }
 
@@ -475,7 +475,7 @@ async function loadPageData() {
 }
 
 async function initVideoEditPage() {
-  currentProfile = await initLayout(isEditMode ? 'Edit Video' : 'Add Video');
+  currentProfile = await initLayout(isEditMode ? 'Sửa video' : 'Thêm video');
   if (!currentProfile) return;
   cacheElements();
   bindEvents();

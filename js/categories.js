@@ -1,8 +1,8 @@
-// categories module: danh sách, thêm, sửa, xóa category (chỉ ADMIN)
-import { supabase } from './supabase.js';
-import { initLayout } from './layout.js';
-import { confirmModal, createPagedTable, openModal, showToast } from './components.js';
-import { createElement, debounce, escapeLikePattern, formatDate, formatNumber, slugify } from './utils.js';
+// Danh mục video: danh sách, thêm, sửa, xóa (chỉ ADMIN)
+import { supabase } from './supabase.js?v=202610171935';
+import { initLayout } from './layout.js?v=202610171935';
+import { confirmModal, createPagedTable, openModal, showToast } from './components.js?v=202610171935';
+import { createElement, debounce, escapeLikePattern, formatDate, formatNumber, slugify } from './utils.js?v=202610171935';
 
 const COLUMN_COUNT = 7;
 const NAME_MAX_LENGTH = 100;
@@ -76,9 +76,9 @@ function createCategoryForm(category) {
   form.noValidate = true;
   form.append(
     createElement('div', 'form-message form-message-error'),
-    createField({ name: 'name', label: 'Name', value: category?.name, required: true }),
-    createField({ name: 'slug', label: 'Slug', value: category?.slug, hint: 'Chỉ gồm a-z, 0-9 và dấu "-". Để trống để tự tạo từ Name.' }),
-    createField({ name: 'description', label: 'Description', type: 'textarea', value: category?.description || '' }),
+    createField({ name: 'name', label: 'Tên danh mục', value: category?.name, required: true }),
+    createField({ name: 'slug', label: 'Đường dẫn (slug)', value: category?.slug, hint: 'Chỉ gồm a-z, 0-9 và dấu "-". Để trống để tự tạo từ tên.' }),
+    createField({ name: 'description', label: 'Mô tả', type: 'textarea', value: category?.description || '' }),
   );
   form.querySelector('.form-message').hidden = true;
 
@@ -115,14 +115,14 @@ function validateCategoryForm(form, values) {
   setFormError(form, 'slug', '');
   let isValid = true;
   if (!values.name) {
-    setFormError(form, 'name', 'Vui lòng nhập tên category.');
+    setFormError(form, 'name', 'Vui lòng nhập tên danh mục.');
     isValid = false;
   } else if (values.name.length > NAME_MAX_LENGTH) {
     setFormError(form, 'name', `Tên tối đa ${NAME_MAX_LENGTH} ký tự.`);
     isValid = false;
   }
   if (values.name && !SLUG_PATTERN.test(values.slug)) {
-    setFormError(form, 'slug', 'Slug không hợp lệ.');
+    setFormError(form, 'slug', 'Đường dẫn (slug) không hợp lệ.');
     isValid = false;
   }
   return isValid;
@@ -135,8 +135,8 @@ function showFormMessage(form, message) {
 }
 
 function getFriendlySaveError(error) {
-  if (error?.code === UNIQUE_VIOLATION) return 'Name hoặc slug đã tồn tại.';
-  return 'Không thể lưu category. Vui lòng thử lại.';
+  if (error?.code === UNIQUE_VIOLATION) return 'Tên hoặc đường dẫn (slug) đã tồn tại.';
+  return 'Không thể lưu danh mục. Vui lòng thử lại.';
 }
 
 function openCategoryModal(category = null) {
@@ -152,7 +152,7 @@ function openCategoryModal(category = null) {
     isSaving = true;
     try {
       await saveCategory(category?.id, values);
-      showToast(category ? 'Đã cập nhật category.' : 'Đã thêm category.', 'success');
+      showToast(category ? 'Đã cập nhật danh mục.' : 'Đã thêm danh mục.', 'success');
       table.load();
       return true;
     } catch (error) {
@@ -164,11 +164,11 @@ function openCategoryModal(category = null) {
   }
 
   openModal({
-    title: category ? 'Edit category' : 'Add category',
+    title: category ? 'Sửa danh mục' : 'Thêm danh mục',
     body: form,
     actions: [
-      { label: 'Cancel', variant: 'secondary' },
-      { label: 'Save', variant: 'primary', onClick: submit },
+      { label: 'Hủy', variant: 'secondary' },
+      { label: 'Lưu', variant: 'primary', onClick: submit },
     ],
   });
   form.elements.name.focus();
@@ -179,19 +179,19 @@ function openCategoryModal(category = null) {
 async function handleDelete(category, button) {
   const videoCount = getVideoCount(category);
   const message = videoCount > 0
-    ? `Category đang có ${videoCount} video. Các video này sẽ không còn category. This action cannot be undone.`
-    : 'This action cannot be undone.';
-  const confirmed = await confirmModal({ title: 'Delete category?', message });
+    ? `Danh mục đang có ${videoCount} video. Các video này sẽ không còn danh mục. Hành động này không thể hoàn tác.`
+    : 'Hành động này không thể hoàn tác.';
+  const confirmed = await confirmModal({ title: 'Xóa danh mục?', message });
   if (!confirmed) return;
 
   button.disabled = true;
   try {
     await deleteCategory(category.id);
-    showToast('Đã xóa category.', 'success');
+    showToast('Đã xóa danh mục.', 'success');
     await table.load();
   } catch {
     button.disabled = false;
-    showToast('Không thể xóa category. Vui lòng thử lại.', 'error');
+    showToast('Không thể xóa danh mục. Vui lòng thử lại.', 'error');
   }
 }
 
@@ -201,11 +201,11 @@ function createActionsCell(category) {
   const cell = createElement('td');
   const wrapper = createElement('div', 'table-actions');
 
-  const editButton = createElement('button', 'btn btn-secondary btn-sm', 'Edit');
+  const editButton = createElement('button', 'btn btn-secondary btn-sm', 'Sửa');
   editButton.type = 'button';
   editButton.addEventListener('click', () => openCategoryModal(category));
 
-  const deleteButton = createElement('button', 'btn btn-danger btn-sm', 'Delete');
+  const deleteButton = createElement('button', 'btn btn-danger btn-sm', 'Xóa');
   deleteButton.type = 'button';
   deleteButton.addEventListener('click', () => handleDelete(category, deleteButton));
 
@@ -229,14 +229,14 @@ function createCategoryRow(category) {
 }
 
 function getEmptyState() {
-  if (filters.search) return { message: 'Không tìm thấy category phù hợp.' };
-  return { message: 'Chưa có category nào.', actionLabel: 'Add Category', onAction: () => openCategoryModal() };
+  if (filters.search) return { message: 'Không tìm thấy danh mục phù hợp.' };
+  return { message: 'Chưa có danh mục nào.', actionLabel: 'Thêm danh mục', onAction: () => openCategoryModal() };
 }
 
 // ---------- Init ----------
 
 async function initCategoriesPage() {
-  const profile = await initLayout('Categories');
+  const profile = await initLayout('Danh mục video');
   if (!profile) return;
 
   elements.searchInput = document.getElementById('search-input');

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Đăng ký học - Học Vèo</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
+  <link rel="stylesheet" href="css/courses.css?v=202610171935">
+  <link rel="stylesheet" href="css/landing.css?v=202610171935">
+  <link rel="stylesheet" href="css/learning.css?v=202610171935">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <div class="page-intro">
+          <div>
+            <h2 class="page-intro-title">Đăng ký học</h2>
+            <p class="text-secondary">Xử lý đăng ký học của thành viên. Kích hoạt để thành viên vào học khóa học.</p>
+          </div>
+        </div>
+
+        <div id="enrollment-stats" class="stat-tiles"></div>
+
+        <section class="card">
+          <div class="toolbar">
+            <div id="status-chips" class="filter-chips" role="group" aria-label="Lọc theo trạng thái"></div>
+            <div class="toolbar-filters">
+              <input type="search" id="search-input" placeholder="Tìm theo email hoặc tên đăng nhập..." aria-label="Tìm theo email hoặc tên đăng nhập">
+              <select id="course-filter" aria-label="Lọc theo khóa học">
+                <option value="">Tất cả khóa học</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Học viên</th>
+                  <th>Khóa học</th>
+                  <th>Số điện thoại</th>
+                  <th>Lời nhắn</th>
+                  <th>Trạng thái</th>
+                  <th>Ngày gửi</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="enrollments-body"></tbody>
+            </table>
+          </div>
+
+          <div id="pagination"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/enrollments.js?v=202610171935"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <!-- Phát triển bản thân / kỹ năng: bậc thang tiến lên, cờ mục tiêu, bóng đèn ý tưởng, bia mục tiêu -->
+  <rect width="640" height="360" fill="#ecfdf5"/>
+  <circle cx="560" cy="50" r="150" fill="#d1fae5"/>
+  <circle cx="70" cy="330" r="110" fill="#ffedd5"/>
+
+  <!-- Bóng đèn ý tưởng -->
+  <g stroke="#f97316" stroke-width="5" stroke-linecap="round">
+    <path d="M160 54 V40"/>
+    <path d="M116 72 L106 62"/>
+    <path d="M204 72 L214 62"/>
+    <path d="M104 112 H90"/>
+    <path d="M216 112 H230"/>
+  </g>
+  <circle cx="160" cy="110" r="36" fill="#fdba74"/>
+  <circle cx="160" cy="110" r="24" fill="#fff7ed"/>
+  <path d="M150 118 L160 104 L170 118" fill="none" stroke="#c2410c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="146" y="142" width="28" height="22" rx="5" fill="#172554"/>
+  <rect x="152" y="166" width="16" height="6" rx="3" fill="#172554"/>
+
+  <!-- Bậc thang -->
+  <rect x="140" y="250" width="80" height="60" rx="6" fill="#1e3a8a"/>
+  <rect x="220" y="200" width="80" height="110" rx="6" fill="#172554"/>
+  <rect x="300" y="150" width="80" height="160" rx="6" fill="#1e3a8a"/>
+  <rect x="380" y="100" width="80" height="210" rx="6" fill="#172554"/>
+  <rect x="120" y="306" width="420" height="6" rx="3" fill="#0b1437" opacity="0.15"/>
+
+  <!-- Đường đi lên -->
+  <path d="M170 236 C220 190 300 150 396 92" fill="none" stroke="#f97316" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>
+
+  <!-- Cờ mục tiêu -->
+  <line x1="436" y1="100" x2="436" y2="34" stroke="#172554" stroke-width="5" stroke-linecap="round"/>
+  <path d="M439 36 L490 50 L439 66 Z" fill="#f97316"/>
+
+  <!-- Bia mục tiêu -->
+  <circle cx="540" cy="248" r="52" fill="#ffffff"/>
+  <circle cx="540" cy="248" r="38" fill="#f97316"/>
+  <circle cx="540" cy="248" r="24" fill="#ffffff"/>
+  <circle cx="540" cy="248" r="11" fill="#172554"/>
+  <line x1="606" y1="186" x2="544" y2="244" stroke="#172554" stroke-width="5" stroke-linecap="round"/>
+  <path d="M598 180 L616 176 L612 194 Z" fill="#16a34a"/>
+</svg>

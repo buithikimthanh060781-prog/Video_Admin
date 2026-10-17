@@ -2,41 +2,154 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Học Vèo – nền tảng khóa học trực tuyến đa lĩnh vực: video bài giảng theo lộ trình từng chương, học mọi lúc mọi nơi và theo dõi tiến độ học tập.">
+  <meta name="theme-color" content="#172554">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <title>Login - Video Admin</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/auth.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="preload" href="assets/fonts/be-vietnam-pro-800-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/be-vietnam-pro-400-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Học Vèo – Học nhanh như vèo, nhớ lâu như in</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/auth.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
+  <link rel="stylesheet" href="css/courses.css?v=202610171935">
+  <link rel="stylesheet" href="css/landing.css?v=202610171935">
 </head>
-<body data-auth-page="login">
-  <main class="auth-page">
-    <div class="auth-card">
-      <div class="auth-logo">Video Admin</div>
-      <h1 class="auth-title">Đăng nhập</h1>
-      <form id="auth-form" class="auth-form" novalidate>
-        <div class="form-message" role="alert" hidden></div>
-        <fieldset>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
-            <small class="field-error" data-error-for="email"></small>
+<body class="public-page landing-page">
+  <a class="skip-link" href="#courses">Bỏ qua, đến danh sách khóa học</a>
+  <header id="public-header" class="public-header"></header>
+
+  <main>
+    <!-- ---------- Hero ---------- -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="hero-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+            Nền tảng học trực tuyến
+          </span>
+          <h1 id="hero-title" class="hero-title">Học nhanh như <span class="hero-accent">vèo</span>,<br> nhớ lâu <span class="hero-accent">như in</span></h1>
+          <p class="hero-lead">Khóa học trực tuyến đa lĩnh vực cho học sinh, sinh viên và người đi làm: video bài giảng theo lộ trình từng chương, học trên mọi thiết bị và theo dõi tiến độ của riêng bạn.</p>
+          <div class="hero-actions">
+            <a href="#courses" class="btn btn-primary btn-lg">
+              Khám phá khóa học
+              <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <!-- Chỉ hiện khi có khóa học miễn phí (course-catalog.js) -->
+            <a href="#courses" id="free-courses-cta" class="btn btn-secondary btn-lg" hidden>Xem khóa học miễn phí</a>
           </div>
-          <div class="form-group">
-            <div class="form-label-row">
-              <label for="password">Password</label>
-              <a href="forgot-password.html" class="auth-link-small">Quên mật khẩu?</a>
-            </div>
-            <input id="password" name="password" type="password" autocomplete="current-password">
-            <small class="field-error" data-error-for="password"></small>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
-        </fieldset>
-      </form>
-      <p class="auth-footer">Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
-    </div>
+          <ul class="hero-points">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Học linh hoạt</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Theo dõi tiến độ</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Nội dung theo lộ trình</li>
+          </ul>
+        </div>
+
+        <!-- Ảnh hero: giảng viên trên màn hình laptop + 4 thẻ thông tin (đã có sẵn trong ảnh). WebP, 2 kích thước. -->
+        <div class="hero-visual">
+          <img class="hero-image"
+               src="assets/images/hero/hero-learning.webp"
+               srcset="assets/images/hero/hero-learning-600.webp 600w, assets/images/hero/hero-learning.webp 969w"
+               sizes="(max-width: 960px) 92vw, 640px"
+               width="969" height="766"
+               alt="Laptop mở bài giảng trực tuyến của Học Vèo: giảng viên đứng cạnh bảng bài 1, danh sách chương học bên trái, kèm các thẻ Tiến độ khóa học 65%, Video bài giảng, Tài liệu học tập và Bài tập thực hành"
+               fetchpriority="high" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- Khóa học ---------- -->
+    <section id="courses" class="public-main courses-section" aria-labelledby="courses-title">
+      <div class="section-head">
+        <div class="section-intro">
+          <p class="section-kicker">Khóa học</p>
+          <h2 id="courses-title" class="section-heading">Khám phá khóa học dành cho bạn</h2>
+          <p class="section-lead">Xem đề cương, giảng viên và học phí trước khi đăng ký.</p>
+        </div>
+        <div class="toolbar-filters course-filters">
+          <input type="search" id="search-input" placeholder="Tìm khóa học..." aria-label="Tìm khóa học" maxlength="100">
+          <select id="category-filter" aria-label="Lọc theo lĩnh vực">
+            <option value="">Tất cả lĩnh vực</option>
+          </select>
+          <select id="price-filter" aria-label="Lọc theo học phí">
+            <option value="">Mọi mức học phí</option>
+            <option value="free">Miễn phí</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="course-grid" class="course-grid" aria-live="polite"></div>
+      <div id="pagination"></div>
+    </section>
+
+    <!-- ---------- Danh mục: lấy từ course_categories, chỉ hiện khi có lĩnh vực đang có khóa học (course-catalog.js) ---------- -->
+    <section id="danh-muc" class="categories-section" aria-labelledby="categories-title" hidden>
+      <div class="section-intro">
+        <p class="section-kicker">Danh mục</p>
+        <h2 id="categories-title" class="section-heading">Khám phá lĩnh vực bạn yêu thích</h2>
+        <p class="section-lead">Chọn một lĩnh vực để xem ngay các khóa học đang mở.</p>
+      </div>
+      <ul id="category-grid" class="category-grid"></ul>
+    </section>
+
+    <!-- ---------- Tính năng ---------- -->
+    <section id="gioi-thieu" class="features" aria-labelledby="features-title">
+      <div class="section-intro">
+        <p class="section-kicker">Vì sao chọn Học Vèo</p>
+        <h2 id="features-title" class="section-heading">Học hiệu quả, theo cách của bạn</h2>
+      </div>
+      <ul class="features-grid">
+        <li class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
+          </span>
+          <h3 class="feature-title">Học theo lộ trình</h3>
+          <p class="feature-text">Mỗi khóa học chia thành chương và bài rõ ràng, đi từng bước từ cơ bản đến nâng cao.</p>
+        </li>
+        <li class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="m17 10 5-3v10l-5-3"/></svg>
+          </span>
+          <h3 class="feature-title">Học mọi lúc, mọi nơi</h3>
+          <p class="feature-text">Xem lại video bài giảng bất cứ khi nào, trên máy tính, máy tính bảng hay điện thoại.</p>
+        </li>
+        <li class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </span>
+          <h3 class="feature-title">Tư vấn 1:1 tận tâm</h3>
+          <p class="feature-text">Đăng ký khóa học bạn quan tâm, quản trị viên liên hệ qua số điện thoại bạn đã đăng ký để tư vấn và kích hoạt khóa học cho riêng bạn.</p>
+        </li>
+        <li class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          <h3 class="feature-title">Theo dõi tiến độ</h3>
+          <p class="feature-text">Đánh dấu bài đã học và xem phần trăm hoàn thành để luôn biết mình đang ở đâu.</p>
+        </li>
+      </ul>
+    </section>
   </main>
-  <script type="module" src="js/auth.js"></script>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="site-footer-brand">
+        <a class="site-footer-logo" href="login.html">
+          <span class="site-footer-mark" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
+          Học Vèo
+        </a>
+        <p>Học nhanh như vèo, nhớ lâu như in.</p>
+      </div>
+      <nav class="site-footer-nav" aria-label="Liên kết cuối trang">
+        <a href="#courses">Khóa học</a>
+        <a href="#gioi-thieu">Giới thiệu</a>
+        <a href="register.html" data-register-popup>Đăng ký miễn phí</a>
+      </nav>
+    </div>
+    <p class="site-footer-copy">© Học Vèo · Nền tảng học trực tuyến</p>
+  </footer>
+
+  <script type="module" src="js/course-catalog.js?v=202610171935"></script>
 </body>
 </html>

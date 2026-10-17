@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data: blob: https:; media-src 'self' blob: https://laoxrsdemwvwcpqjqecq.supabase.co; frame-src https://www.youtube-nocookie.com; connect-src 'self' https://laoxrsdemwvwcpqjqecq.supabase.co wss://laoxrsdemwvwcpqjqecq.supabase.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <title>Khóa học - Học Vèo</title>
+  <link rel="stylesheet" href="css/style.css?v=202610171935">
+  <link rel="stylesheet" href="css/responsive.css?v=202610171935">
+  <link rel="stylesheet" href="css/courses.css?v=202610171935">
+</head>
+<body class="auth-pending">
+  <div class="admin-layout">
+    <aside id="sidebar" class="sidebar"></aside>
+    <div class="main">
+      <header id="header" class="header"></header>
+      <main id="content" class="content">
+        <nav class="breadcrumb" aria-label="Đường dẫn trang">
+          <a href="courses.html">Quản lý khóa học</a>
+          <span aria-hidden="true">/</span>
+          <span id="breadcrumb-current" aria-current="page">Thêm khóa học</span>
+        </nav>
+
+        <div id="page-state" hidden></div>
+
+        <div id="course-editor" hidden>
+          <div class="tabs" role="tablist" aria-label="Các bước của khóa học">
+            <button type="button" class="tab-button active" role="tab" id="tab-general" data-tab="general" aria-selected="true" aria-controls="panel-general">1. Thông tin chung</button>
+            <button type="button" class="tab-button" role="tab" id="tab-curriculum" data-tab="curriculum" aria-selected="false" aria-controls="panel-curriculum">2. Chương trình học</button>
+            <button type="button" class="tab-button" role="tab" id="tab-preview" data-tab="preview" aria-selected="false" aria-controls="panel-preview">3. Xem trước</button>
+            <button type="button" class="tab-button" role="tab" id="tab-publish" data-tab="publish" aria-selected="false" aria-controls="panel-publish">Xuất bản</button>
+          </div>
+
+          <form id="course-form" class="video-form" novalidate>
+            <div class="form-message" role="alert" hidden></div>
+            <fieldset class="video-form-grid" id="panel-general" role="tabpanel" aria-labelledby="tab-general">
+              <section class="card">
+                <h2 class="card-title">Thông tin khóa học</h2>
+
+                <div class="form-group">
+                  <label for="title">Tên khóa học <span class="required">*</span></label>
+                  <input id="title" name="title" type="text" maxlength="200" autocomplete="off">
+                  <small class="field-error" data-error-for="title"></small>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="code">Mã khóa học <span class="required">*</span></label>
+                    <input id="code" name="code" type="text" maxlength="30" autocomplete="off">
+                    <small class="form-hint">Chữ, số, dấu "-" hoặc "_". Tự tạo khi thêm mới.</small>
+                    <small class="field-error" data-error-for="code"></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="slug">Đường dẫn (slug)</label>
+                    <input id="slug" name="slug" type="text" maxlength="100" autocomplete="off">
+                    <small class="form-hint">Để trống để tự tạo từ tên.</small>
+                    <small class="field-error" data-error-for="slug"></small>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="category">Lĩnh vực</label>
+                    <select id="category" name="category">
+                      <option value="">-- Chọn lĩnh vực --</option>
+                    </select>
+                    <small class="form-hint">Bắt buộc khi xuất bản.</small>
+                    <small class="field-error" data-error-for="category"></small>
+                  </div>
+                  <div class="form-group">
+                    <label for="instructor">Giảng viên</label>
+                    <input id="instructor" name="instructor" type="text" maxlength="100" autocomplete="off">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="short-description">Mô tả ngắn</label>
+                  <textarea id="short-description" name="shortDescription" maxlength="300" rows="2"></textarea>
+                  <small class="form-hint">Hiển thị ở danh sách khóa học. Tối đa 300 ký tự.</small>
+                </div>
+                <div class="form-group">
+                  <label for="description">Mô tả chi tiết</label>
+                  <textarea id="description" name="description" maxlength="10000" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="target-audience">Đối tượng phù hợp</label>
+                  <textarea id="target-audience" name="targetAudience" maxlength="3000" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="learning-outcomes">Kiến thức đạt được</label>
+                  <textarea id="learning-outcomes" name="learningOutcomes" maxlength="3000" rows="4"></textarea>
+                  <small class="form-hint">Mỗi ý một dòng.</small>
+                </div>
+                <div class="form-group">
+                  <label for="requirements">Yêu cầu đầu vào</label>
+                  <textarea id="requirements" name="requirements" maxlength="3000" rows="3"></textarea>
+                </div>
+              </section>
+
+              <div class="form-side">
+                <section class="card">
+                  <h2 class="card-title">Ảnh bìa (thumbnail)</h2>
+                  <div class="form-group">
+                    <div class="media-preview">
+                      <img id="thumbnail-preview" src="assets/thumbnail-placeholder.svg" alt="Xem trước ảnh bìa">
+                    </div>
+                    <input id="thumbnail" name="thumbnail" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Chọn ảnh bìa">
+                    <small class="form-hint">JPG, PNG, WEBP · tối đa 5 MB. Bắt buộc khi xuất bản.</small>
+                    <small class="field-error" data-error-for="thumbnail"></small>
+                  </div>
+                </section>
+
+                <section class="card">
+                  <h2 class="card-title">Giá và phân loại</h2>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="price">Giá niêm yết (VNĐ) <span class="required">*</span></label>
+                      <input id="price" name="price" type="number" min="0" step="1" inputmode="numeric" value="0">
+                      <small class="field-error" data-error-for="price"></small>
+                    </div>
+                    <div class="form-group">
+                      <label for="sale-price">Giá khuyến mại (VNĐ)</label>
+                      <input id="sale-price" name="salePrice" type="number" min="0" step="1" inputmode="numeric">
+                      <small class="field-error" data-error-for="salePrice"></small>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="level">Trình độ</label>
+                      <select id="level" name="level"></select>
+                    </div>
+                    <div class="form-group">
+                      <label for="language">Ngôn ngữ</label>
+                      <select id="language" name="language"></select>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </fieldset>
+
+            <div class="form-actions" id="general-actions">
+              <a href="courses.html" class="btn btn-secondary">Hủy</a>
+              <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
+          </form>
+
+          <section id="panel-curriculum" class="card" role="tabpanel" aria-labelledby="tab-curriculum" hidden>
+            <h2 class="card-title">Chương trình học</h2>
+            <div id="curriculum-root"></div>
+          </section>
+
+          <section id="panel-preview" class="card" role="tabpanel" aria-labelledby="tab-preview" hidden>
+            <h2 class="card-title">Xem trước giao diện khách hàng</h2>
+            <p id="preview-notice" class="form-message form-message-error" hidden>Bạn có thay đổi chưa lưu ở tab "Thông tin chung". Bản xem trước chỉ dùng dữ liệu đã lưu.</p>
+            <div id="preview-root"></div>
+          </section>
+
+          <section id="panel-publish" class="card" role="tabpanel" aria-labelledby="tab-publish" hidden>
+            <h2 class="card-title">Xuất bản khóa học</h2>
+            <dl class="info-list">
+              <dt>Trạng thái</dt>
+              <dd id="publish-status"></dd>
+              <dt>Cập nhật</dt>
+              <dd id="publish-updated"></dd>
+            </dl>
+
+            <h3 class="section-subtitle">Điều kiện xuất bản</h3>
+            <ul id="publish-checklist" class="checklist"></ul>
+
+            <div class="form-message" id="publish-message" role="alert" hidden></div>
+            <p class="form-hint">Chỉ quản trị viên được đổi trạng thái. Lưu "Thông tin chung" trước khi đổi trạng thái.</p>
+
+            <div class="form-actions form-actions-start">
+              <button type="button" class="btn btn-secondary" data-status="DRAFT">Lưu bản nháp</button>
+              <button type="button" class="btn btn-primary" data-status="PUBLISHED">Xuất bản</button>
+              <button type="button" class="btn btn-secondary" data-status="HIDDEN">Ẩn khóa học</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="js/course-edit.js?v=202610171935"></script>
+</body>
+</html>

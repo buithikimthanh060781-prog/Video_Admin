@@ -37,6 +37,7 @@
     transition: transform 0.2s ease;
   }
   .sidebar-label { display: inline; }
+  .sidebar-group-title { display: block; }
   .sidebar-logo, .sidebar-link { justify-content: flex-start; padding-left: 12px; padding-right: 12px; }
 
   .sidebar-open .sidebar { transform: translateX(0); box-shadow: var(--shadow-lg); }

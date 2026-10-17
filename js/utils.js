@@ -12,6 +12,12 @@ export function formatNumber(value) {
   return new Intl.NumberFormat('vi-VN').format(Number(value) || 0);
 }
 
+// Số nguyên VNĐ -> "1.500.000 ₫"
+export function formatCurrency(value) {
+  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 })
+    .format(Number(value) || 0);
+}
+
 export function formatDate(value) {
   if (!value) return '';
   return new Date(value).toLocaleDateString('vi-VN');
