@@ -1,11 +1,11 @@
 // course-curriculum module: quản lý chương và bài học của một khóa học (tab "Chương trình học")
 // Bài học chỉ tham chiếu video gốc (video_id). Xóa chương/bài chỉ xóa liên kết, không xóa video.
-import { supabase } from './supabase.js?v=202610171951';
-import { confirmModal, createBadge, createStateView, openModal, showToast } from './components.js?v=202610171951';
-import { createVideoPicker } from './course-video-picker.js?v=202610171951';
-import { VIDEO_STATUSES } from './course-utils.js?v=202610171951';
-import { openVideoModal } from './player.js?v=202610171951';
-import { createElement, formatDuration } from './utils.js?v=202610171951';
+import { supabase } from './supabase.js?v=202610172049';
+import { confirmModal, createBadge, createStateView, openModal, showToast } from './components.js?v=202610172049';
+import { createVideoPicker } from './course-video-picker.js?v=202610172049';
+import { VIDEO_STATUSES } from './course-utils.js?v=202610172049';
+import { openVideoModal } from './player.js?v=202610172049';
+import { createElement, formatDuration } from './utils.js?v=202610172049';
 
 const TITLE_MAX_LENGTH = 200;
 const DESCRIPTION_MAX_LENGTH = 2000;

@@ -119,28 +119,18 @@ body.auth-pending .admin-layout { visibility: hidden; }
   overflow-y: auto;
 }
 
-/* Logo: ô cam + tia chớp navy, chữ "Học Vèo" navy */
+/* Logo Học Vèo (ảnh assets/images/brand) */
 .sidebar-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  height: 40px;
-  padding: 0 12px;
-  margin-bottom: 24px;
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--color-secondary);
+  height: 44px;
+  padding: 0 8px;
+  margin-bottom: 20px;
+  border-radius: var(--radius-sm);
 }
-.sidebar-logo .icon {
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  color: var(--color-on-primary);
-  background: var(--color-primary);
-}
+/* Logo ảnh: đầy đủ khi menu mở rộng, chỉ biểu tượng khi menu thu gọn (tablet, responsive.css) */
+.sidebar-logo-full { display: block; width: auto; height: 40px; }
+.sidebar-logo-icon { display: none; width: 40px; height: 40px; }
 
 .sidebar-nav { display: flex; flex-direction: column; gap: 4px; flex: 1; }
 

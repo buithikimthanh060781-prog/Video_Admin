@@ -39,6 +39,7 @@ với biến môi trường `SUPABASE_DB_PASSWORD`):
 11. `database/09_courses.sql` … `database/13_protect_course_videos.sql` — khóa học, đăng ký học, thông báo, bảo vệ video khóa học
 12. `database/14_member_activation.sql` — thành viên mới đăng ký ở trạng thái **PENDING** (chờ kích hoạt); ADMIN không tự đổi role/status của chính mình
 13. `database/15_member_phone.sql` — cột `profiles.phone` (nhập khi đăng ký, ADMIN xem ở trang Thành viên); nút **Đăng ký** khóa học gửi yêu cầu ngay bằng số điện thoại trong hồ sơ (không cần popup)
+14. `database/16_username_duplicate.sql` — tên đăng nhập **được trùng** (bỏ UNIQUE), email **không được trùng** (hàm `is_email_available` cho trang đăng ký)
 
 ## Kích hoạt thành viên
 - Đăng ký xong, tài khoản ở trạng thái **Chờ kích hoạt** (PENDING): chưa đăng nhập, chưa đăng ký học được.

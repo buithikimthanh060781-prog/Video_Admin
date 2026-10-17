@@ -1,15 +1,15 @@
 // course-catalog module: danh sách khóa học công khai (PUBLISHED)
 // Dùng cho login.html (trang chủ công khai) và explore.html (trong hệ thống, body[data-layout="app"]).
 // Hỗ trợ tham số URL: ?q=từ-khóa, ?category=ID, ?price=free (dùng bởi header và nút ở hero).
-import { supabase } from './supabase.js?v=202610171951';
-import { initLayout } from './layout.js?v=202610171951';
-import { initPublicLayout } from './public-layout.js?v=202610171951';
-import { createBadge, createPagedList, createStateView, showToast } from './components.js?v=202610171951';
-import { createPriceView } from './course-view.js?v=202610171951';
-import { getCategoryArt, setCourseImage } from './course-art.js?v=202610171951';
-import { ENROLLMENT_STATUSES, fetchMyEnrollmentMap } from './enrollment.js?v=202610171951';
-import { createIcon } from './icons.js?v=202610171951';
-import { createElement, debounce, escapeLikePattern } from './utils.js?v=202610171951';
+import { supabase } from './supabase.js?v=202610172049';
+import { initLayout } from './layout.js?v=202610172049';
+import { initPublicLayout } from './public-layout.js?v=202610172049';
+import { createBadge, createPagedList, createStateView, showToast } from './components.js?v=202610172049';
+import { createPriceView } from './course-view.js?v=202610172049';
+import { getCategoryArt, setCourseImage } from './course-art.js?v=202610172049';
+import { ENROLLMENT_STATUSES, fetchMyEnrollmentMap } from './enrollment.js?v=202610172049';
+import { createIcon } from './icons.js?v=202610172049';
+import { createElement, debounce, escapeLikePattern } from './utils.js?v=202610172049';
 
 const PAGE_SIZE_OPTIONS = [12, 24, 48];
 const CARD_COLUMNS = 'id, slug, title, thumbnail_url, instructor_name, price, sale_price, course_categories(name), course_sections(course_lessons(count))';

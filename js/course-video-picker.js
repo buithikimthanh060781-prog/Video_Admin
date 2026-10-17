@@ -1,10 +1,10 @@
 // Bộ chọn video từ kho video hiện có (bảng videos). Không upload, không sao chép video.
 // Hiển thị bên trong modal bài học (không mở modal chồng modal).
-import { supabase } from './supabase.js?v=202610171951';
-import { createBadge, createPagedTable, showToast } from './components.js?v=202610171951';
-import { VIDEO_STATUSES } from './course-utils.js?v=202610171951';
-import { isYouTubeVideo } from './player.js?v=202610171951';
-import { createElement, debounce, escapeLikePattern, formatDuration } from './utils.js?v=202610171951';
+import { supabase } from './supabase.js?v=202610172049';
+import { createBadge, createPagedTable, showToast } from './components.js?v=202610172049';
+import { VIDEO_STATUSES } from './course-utils.js?v=202610172049';
+import { isYouTubeVideo } from './player.js?v=202610172049';
+import { createElement, debounce, escapeLikePattern, formatDuration } from './utils.js?v=202610172049';
 
 const PAGE_SIZE_OPTIONS = [5, 10, 20];
 const COLUMN_COUNT = 6;

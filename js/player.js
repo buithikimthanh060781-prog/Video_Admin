@@ -1,7 +1,7 @@
 // Trình phát video: tệp tải lên (signed URL, bucket private) hoặc nhúng YouTube
-import { createStateView, openModal } from './components.js?v=202610171951';
-import { BUCKETS, createSignedUrl } from './storage.js?v=202610171951';
-import { createElement } from './utils.js?v=202610171951';
+import { createStateView, openModal } from './components.js?v=202610172049';
+import { BUCKETS, createSignedUrl } from './storage.js?v=202610172049';
+import { createElement } from './utils.js?v=202610172049';
 
 export const VIDEO_SOURCES = {
   upload: 'UPLOAD',

@@ -2,13 +2,13 @@
 // Desktop: logo · menu (Trang chủ, Khóa học, Danh mục ▾, Giới thiệu) · tìm kiếm · Đăng nhập · Đăng ký miễn phí.
 // Mobile (≤ 960px, css/landing.css): logo + nút hamburger mở bảng menu.
 // Dropdown "Danh mục" và menu mobile dùng được bằng chuột, cảm ứng và bàn phím.
-import { supabase } from './supabase.js?v=202610171951';
-import { getCurrentProfile, getHomePage, getSession, isActive } from './auth.js?v=202610171951';
-import { openLoginModal } from './login-modal.js?v=202610171951';
-import { openRegisterModal } from './register-modal.js?v=202610171951';
-import { showFlashToast } from './components.js?v=202610171951';
-import { createIcon } from './icons.js?v=202610171951';
-import { createElement } from './utils.js?v=202610171951';
+import { supabase } from './supabase.js?v=202610172049';
+import { getCurrentProfile, getHomePage, getSession, isActive } from './auth.js?v=202610172049';
+import { openLoginModal } from './login-modal.js?v=202610172049';
+import { openRegisterModal } from './register-modal.js?v=202610172049';
+import { showFlashToast } from './components.js?v=202610172049';
+import { createIcon, createLogoImage } from './icons.js?v=202610172049';
+import { createElement } from './utils.js?v=202610172049';
 
 // login.html là trang chủ công khai: banner + danh sách khóa học + nút Đăng nhập (popup)
 export const HOME_PAGE = 'login.html';
@@ -66,9 +66,7 @@ function createBrand() {
   const brand = createElement('a', 'public-brand');
   brand.href = HOME_PAGE;
   brand.setAttribute('aria-label', 'Học Vèo - Trang chủ');
-  const text = createElement('span', 'brand-text');
-  text.append(createElement('span', 'brand-hoc', 'Học'), document.createTextNode(' '), createElement('span', 'brand-veo', 'Vèo'));
-  brand.append(createIcon('zap', 20), text);
+  brand.appendChild(createLogoImage('public-brand-logo', { alt: '' }));
   return brand;
 }
 

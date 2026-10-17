@@ -25,6 +25,25 @@ const ICON_PATHS = {
   arrowRight: '<path d="M5 12h14M13 6l6 6-6 6"/>',
 };
 
+// ---------- Logo Học Vèo (ảnh trong assets/images/brand) ----------
+export const LOGO_SRC = 'assets/images/brand/logo-hoc-veo.webp';
+export const LOGO_ICON_SRC = 'assets/images/brand/logo-icon-192.png';
+const LOGO_SIZE = { width: 777, height: 192 };
+const LOGO_ICON_SIZE = { width: 192, height: 192 };
+
+// alt rỗng khi ảnh nằm trong link đã có aria-label (tránh đọc tên 2 lần)
+export function createLogoImage(className, { iconOnly = false, alt = 'Học Vèo' } = {}) {
+  const image = document.createElement('img');
+  image.className = className;
+  image.src = iconOnly ? LOGO_ICON_SRC : LOGO_SRC;
+  const size = iconOnly ? LOGO_ICON_SIZE : LOGO_SIZE;
+  image.width = size.width;
+  image.height = size.height;
+  image.alt = alt;
+  image.decoding = 'async';
+  return image;
+}
+
 export function createIcon(name, size = 20) {
   const wrapper = document.createElement('span');
   wrapper.className = 'icon';

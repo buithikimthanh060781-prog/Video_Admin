@@ -1,10 +1,10 @@
 // Popup đăng nhập 2 cột cho trang công khai (login.html, course-detail.html, register.html...). ADMIN và USER dùng chung.
 // Các hàm tạo ô nhập / cột trái được dùng lại cho popup đăng ký (register-modal.js).
-import { bindLoginForm } from './auth.js?v=202610171951';
-import { openModal } from './components.js?v=202610171951';
-import { createIcon } from './icons.js?v=202610171951';
-import { openRegisterModal } from './register-modal.js?v=202610171951';
-import { createElement } from './utils.js?v=202610171951';
+import { bindLoginForm } from './auth.js?v=202610172049';
+import { openModal } from './components.js?v=202610172049';
+import { createIcon } from './icons.js?v=202610172049';
+import { openRegisterModal } from './register-modal.js?v=202610172049';
+import { createElement } from './utils.js?v=202610172049';
 
 // DEV ONLY: tài khoản demo để test. Xóa DEMO_ACCOUNTS và createDemoAccounts() trước khi triển khai production.
 const DEMO_ACCOUNTS = [

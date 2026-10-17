@@ -18,6 +18,7 @@
 
   .sidebar { padding: 16px 10px; }
   .sidebar-label { display: none; }
+  .sidebar-logo-icon { display: block; }
   .sidebar-logo, .sidebar-link { justify-content: center; padding-left: 0; padding-right: 0; }
 
   .header-search { width: 200px; }
@@ -38,6 +39,8 @@
   }
   .sidebar-label { display: inline; }
   .sidebar-group-title { display: block; }
+  .sidebar-logo-full { display: block; }
+  .sidebar-logo-icon { display: none; }
   .sidebar-logo, .sidebar-link { justify-content: flex-start; padding-left: 12px; padding-right: 12px; }
 
   .sidebar-open .sidebar { transform: translateX(0); box-shadow: var(--shadow-lg); }

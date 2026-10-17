@@ -1,9 +1,9 @@
 // Layout dùng chung: Sidebar + Header + User menu + Mobile menu
-import { supabase } from './supabase.js?v=202610171951';
-import { requireAuth, isAdmin, signOut, getHomePage } from './auth.js?v=202610171951';
-import { createIcon } from './icons.js?v=202610171951';
-import { createNotificationBell } from './notifications.js?v=202610171951';
-import { createElement, debounce, getInitials } from './utils.js?v=202610171951';
+import { supabase } from './supabase.js?v=202610172049';
+import { requireAuth, isAdmin, signOut, getHomePage } from './auth.js?v=202610172049';
+import { createIcon, createLogoImage } from './icons.js?v=202610172049';
+import { createNotificationBell } from './notifications.js?v=202610172049';
+import { createElement, debounce, getInitials } from './utils.js?v=202610172049';
 
 const ENROLLMENTS_PAGE = 'enrollments.html';
 const USERS_PAGE = 'users.html';
@@ -96,7 +96,9 @@ export function renderSidebar(profile) {
 
   const logo = createElement('a', 'sidebar-logo');
   logo.href = getHomePage(profile);
-  logo.append(createIcon('zap', 20), createElement('span', 'sidebar-label', 'Học Vèo'));
+  logo.setAttribute('aria-label', 'Học Vèo - Trang chủ');
+  // Logo đầy đủ; khi menu thu gọn (tablet) chỉ hiện biểu tượng
+  logo.append(createLogoImage('sidebar-logo-full sidebar-label', { alt: '' }), createLogoImage('sidebar-logo-icon', { iconOnly: true, alt: '' }));
 
   const nav = createElement('nav', 'sidebar-nav');
   nav.setAttribute('aria-label', 'Menu chính');

@@ -1,6 +1,6 @@
 // Authentication: Supabase Auth + kiểm tra session/role
-import { supabase } from './supabase.js?v=202610171951';
-import { setFlashToast } from './components.js?v=202610171951';
+import { supabase } from './supabase.js?v=202610172049';
+import { setFlashToast } from './components.js?v=202610172049';
 
 export const ROLE_ADMIN = 'ADMIN';
 // Trang chủ công khai; popup đăng nhập chỉ mở khi người dùng bấm nút "Đăng nhập"
@@ -22,7 +22,7 @@ export const MEMBER_STATUSES = {
 };
 
 const MIN_PASSWORD_LENGTH = 6;
-// Tên đăng nhập: không giới hạn ký tự (tiếng Việt có dấu, khoảng trắng...), chỉ cần không trống và không trùng
+// Tên đăng nhập: không giới hạn ký tự (tiếng Việt có dấu, khoảng trắng...), được trùng; chỉ cần không trống. Email thì không được trùng.
 const USERNAME_MAX_LENGTH = 50;
 // Số điện thoại: khớp ràng buộc profiles_phone_format (database/15_member_phone.sql)
 export const PHONE_PATTERN = /^[0-9+ .()-]{8,20}$/;
@@ -35,7 +35,7 @@ export function getFriendlyAuthError(error) {
   if (message.includes('invalid login credentials')) return 'Email hoặc mật khẩu không đúng.';
   // Chưa xác nhận email = chưa được ADMIN kích hoạt (kích hoạt sẽ xác nhận email, xem 14_member_activation.sql)
   if (message.includes('email not confirmed')) return PENDING_MESSAGE;
-  if (message.includes('already registered')) return 'Email đã được sử dụng.';
+  if (message.includes('already registered')) return 'Email đã được sử dụng. Mỗi email chỉ đăng ký một tài khoản.';
   if (message.includes('rate limit') || error?.status === 429) return 'Bạn thao tác quá nhanh. Vui lòng thử lại sau.';
   if (message.includes('same as the old')) return 'Mật khẩu mới phải khác mật khẩu cũ.';
   if (message.includes('password')) return `Mật khẩu phải có ít nhất ${MIN_PASSWORD_LENGTH} ký tự.`;
@@ -118,10 +118,12 @@ export async function signIn(email, password) {
   return data.session;
 }
 
-export async function isUsernameAvailable(username) {
-  const { data, error } = await supabase.rpc('is_username_available', { p_username: username });
-  if (error) throw error;
-  return data === true;
+// Email chưa có tài khoản nào dùng (database/16_username_duplicate.sql).
+// Lỗi khi gọi (vd chưa chạy file SQL) thì coi như hợp lệ: Supabase Auth vẫn chặn email trùng ở bước đăng ký.
+export async function isEmailAvailable(email) {
+  const { data, error } = await supabase.rpc('is_email_available', { p_email: email });
+  if (error) return true;
+  return data !== false;
 }
 
 // Role không được gửi từ frontend: database trigger luôn tạo profile với role USER.
@@ -286,8 +288,9 @@ async function validateRegisterForm(form, { username, email, phone, password, co
   isValid = validatePasswordConfirm(form, password, confirmPassword) && isValid;
   if (!isValid) return false;
 
-  if (!(await isUsernameAvailable(username))) {
-    setFieldError(form, 'username', 'Tên đăng nhập đã được sử dụng.');
+  // Tên đăng nhập được trùng; email thì không
+  if (!(await isEmailAvailable(email))) {
+    setFieldError(form, 'email', 'Email đã được sử dụng. Mỗi email chỉ đăng ký một tài khoản.');
     return false;
   }
   return true;

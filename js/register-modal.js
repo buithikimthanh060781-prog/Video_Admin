@@ -1,7 +1,7 @@
 // Popup đăng ký thành viên 2 cột (cùng khung với popup đăng nhập) cho trang công khai.
 // Đăng ký xong: đóng popup, hiện thông báo "chờ quản trị viên kích hoạt" ngay trên trang hiện tại.
-import { bindRegisterForm } from './auth.js?v=202610171951';
-import { showToast } from './components.js?v=202610171951';
+import { bindRegisterForm } from './auth.js?v=202610172049';
+import { showToast } from './components.js?v=202610172049';
 import {
   createAside,
   createAuthMain,
@@ -11,8 +11,8 @@ import {
   createSwitchLink,
   openAuthModal,
   openLoginModal,
-} from './login-modal.js?v=202610171951';
-import { createElement } from './utils.js?v=202610171951';
+} from './login-modal.js?v=202610172049';
+import { createElement } from './utils.js?v=202610172049';
 
 const ID_PREFIX = 'register';
 
@@ -24,8 +24,8 @@ const ASIDE_POINTS = [
 ];
 
 const FIELDS = [
-  { name: 'username', label: 'Tên đăng nhập', type: 'text', autocomplete: 'username', placeholder: 'vd: Nguyễn Văn An', hint: 'Có thể dùng tiếng Việt có dấu, không trùng với thành viên khác' },
-  { name: 'email', label: 'Email', type: 'email', autocomplete: 'email', placeholder: 'ban@example.com' },
+  { name: 'username', label: 'Tên đăng nhập', type: 'text', autocomplete: 'username', placeholder: 'vd: Nguyễn Văn An', hint: 'Có thể dùng tiếng Việt có dấu' },
+  { name: 'email', label: 'Email', type: 'email', autocomplete: 'email', placeholder: 'ban@example.com', hint: 'Dùng để đăng nhập. Mỗi email chỉ đăng ký một tài khoản' },
   { name: 'phone', label: 'Số điện thoại', type: 'tel', autocomplete: 'tel', placeholder: 'vd: 0912 345 678', hint: 'Quản trị viên liên hệ qua số này để kích hoạt tài khoản và khóa học' },
   { name: 'password', label: 'Mật khẩu', type: 'password', autocomplete: 'new-password', placeholder: 'Ít nhất 6 ký tự' },
   { name: 'confirmPassword', label: 'Nhập lại mật khẩu', type: 'password', autocomplete: 'new-password', placeholder: 'Nhập lại mật khẩu ở trên' },

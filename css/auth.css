@@ -15,14 +15,9 @@
   padding: 32px;
 }
 
-.auth-logo {
-  display: block;
-  text-align: center;
-  font-weight: 700;
-  color: var(--color-primary-strong);
-  margin-bottom: 8px;
-}
-a.auth-logo:hover { color: var(--color-primary-hover); }
+/* Logo Học Vèo (ảnh) ở đầu thẻ đăng ký / quên mật khẩu / đặt lại mật khẩu */
+.auth-logo { display: flex; justify-content: center; margin: 4px auto 16px; width: fit-content; border-radius: var(--radius-sm); }
+.auth-logo img { display: block; width: auto; height: 48px; }
 
 /* Link quay về trang chủ (login.html) ở đầu thẻ */
 .auth-back {
