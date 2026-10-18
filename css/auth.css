@@ -48,6 +48,9 @@
 .form-label-row { display: flex; justify-content: space-between; align-items: center; }
 
 .auth-link-small { font-size: 13px; }
+/* Nút trông như liên kết (vd "Quên mật khẩu?") */
+.link-button { padding: 0; border: none; background: none; color: var(--color-primary-strong); font: inherit; font-size: 13px; cursor: pointer; }
+.link-button:hover { text-decoration: underline; }
 
 .auth-footer {
   margin: 20px 0 0;

@@ -8,8 +8,8 @@
   <link rel="icon" type="image/png" sizes="64x64" href="assets/images/brand/favicon-64.png">
   <link rel="apple-touch-icon" href="assets/images/brand/logo-icon-192.png">
   <title>Tổng quan - Học Vèo</title>
-  <link rel="stylesheet" href="css/style.css?v=202610172049">
-  <link rel="stylesheet" href="css/responsive.css?v=202610172049">
+  <link rel="stylesheet" href="css/style.css?v=202610180851">
+  <link rel="stylesheet" href="css/responsive.css?v=202610180851">
 </head>
 <body class="auth-pending">
   <div class="admin-layout">
@@ -17,68 +17,11 @@
     <div class="main">
       <header id="header" class="header"></header>
       <main id="content" class="content">
-        <!-- Statistics -->
-        <section class="stats-grid" aria-label="Thống kê">
-          <div class="card stat-card" data-stat="total_videos" data-icon="video">
-            <div><div class="stat-label">Tổng số video</div><div class="stat-value">—</div></div>
-          </div>
-          <div class="card stat-card" data-stat="total_views" data-icon="eye">
-            <div><div class="stat-label">Tổng lượt xem</div><div class="stat-value">—</div></div>
-          </div>
-          <div class="card stat-card" data-stat="storage_used" data-icon="storage">
-            <div><div class="stat-label">Dung lượng đã dùng</div><div class="stat-value">—</div></div>
-          </div>
-          <div class="card stat-card" data-stat="total_users" data-icon="users">
-            <div><div class="stat-label">Tổng thành viên</div><div class="stat-value">—</div></div>
-          </div>
-        </section>
-
-        <!-- 10 video xem nhiều nhất -->
-        <section class="dashboard-grid">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">10 video xem nhiều nhất</h2>
-            </div>
-            <div id="top-chart-container" class="chart-container"></div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Bảng xếp hạng video</h2>
-            </div>
-            <div class="table-wrapper">
-              <table class="table table-compact">
-                <thead>
-                  <tr>
-                    <th>Hạng</th>
-                    <th>Ảnh bìa</th>
-                    <th>Tiêu đề</th>
-                    <th class="text-right">Lượt xem</th>
-                  </tr>
-                </thead>
-                <tbody id="top-videos-body"></tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <!-- Lượt xem theo thời gian -->
-        <section class="card">
-          <div class="card-header">
-            <h2 class="card-title">Lượt xem theo thời gian</h2>
-            <div class="segmented" id="views-range" role="group" aria-label="Khoảng thời gian">
-              <button type="button" data-range="7days" class="active">7 ngày</button>
-              <button type="button" data-range="30days">30 ngày</button>
-              <button type="button" data-range="thisMonth">Tháng này</button>
-              <button type="button" data-range="thisYear">Năm nay</button>
-            </div>
-          </div>
-          <div id="views-chart-container" class="chart-container"></div>
-        </section>
+        <!-- Hướng dẫn cho admin mới (admin-checklist.js) -->
+        <section id="admin-checklist" class="card onboard" aria-label="Bắt đầu quản trị" hidden></section>
       </main>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="module" src="js/dashboard.js?v=202610172049"></script>
+  <script type="module" src="js/overview.js?v=202610180851"></script>
 </body>
 </html>

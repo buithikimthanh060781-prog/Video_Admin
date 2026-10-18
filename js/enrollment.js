@@ -1,8 +1,8 @@
 // Đăng ký học: thành viên bấm "Đăng ký" -> ADMIN liên hệ qua số điện thoại và kích hoạt -> thành viên vào học.
 // Thành viên chỉ gửi yêu cầu qua RPC request_enrollment (không tự kích hoạt được).
-import { supabase } from './supabase.js?v=202610172049';
-import { showToast } from './components.js?v=202610172049';
-import { createElement, formatDate } from './utils.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { showToast } from './components.js?v=202610180851';
+import { createElement, formatDate } from './utils.js?v=202610180851';
 
 export const LEARN_PAGE = 'learn.html';
 

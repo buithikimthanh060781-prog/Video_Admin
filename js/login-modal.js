@@ -1,10 +1,11 @@
 // Popup đăng nhập 2 cột cho trang công khai (login.html, course-detail.html, register.html...). ADMIN và USER dùng chung.
 // Các hàm tạo ô nhập / cột trái được dùng lại cho popup đăng ký (register-modal.js).
-import { bindLoginForm } from './auth.js?v=202610172049';
-import { openModal } from './components.js?v=202610172049';
-import { createIcon } from './icons.js?v=202610172049';
-import { openRegisterModal } from './register-modal.js?v=202610172049';
-import { createElement } from './utils.js?v=202610172049';
+import { bindLoginForm } from './auth.js?v=202610180851';
+import { openModal } from './components.js?v=202610180851';
+import { createIcon } from './icons.js?v=202610180851';
+import { openRegisterModal } from './register-modal.js?v=202610180851';
+import { openForgotModal } from './forgot-modal.js?v=202610180851';
+import { createElement } from './utils.js?v=202610180851';
 
 // DEV ONLY: tài khoản demo để test. Xóa DEMO_ACCOUNTS và createDemoAccounts() trước khi triển khai production.
 const DEMO_ACCOUNTS = [
@@ -68,10 +69,12 @@ function createPasswordField() {
   const group = createElement('div', 'form-group');
   const label = createElement('label', '', 'Mật khẩu');
   label.htmlFor = 'login-password';
-  const forgotLink = createElement('a', 'auth-link-small', 'Quên mật khẩu?');
-  forgotLink.href = 'forgot-password.html';
+  // Nút (không phải link): mở popup quên mật khẩu ngay trên trang, không chuyển sang forgot-password.html
+  const forgotButton = createElement('button', 'auth-link-small link-button', 'Quên mật khẩu?');
+  forgotButton.type = 'button';
+  forgotButton.dataset.authForgot = '';
   const row = createElement('div', 'form-label-row');
-  row.append(label, forgotLink);
+  row.append(label, forgotButton);
 
   const input = createInput({ name: 'password', type: 'password', autocomplete: 'current-password', placeholder: '••••••' });
   const wrapper = createElement('div', 'input-action');
@@ -148,10 +151,10 @@ export function createAuthMain(title, subtitle, form) {
 }
 
 // Mở popup 2 cột. Trả về hàm đóng popup.
-export function openAuthModal({ title, aside, main }) {
+export function openAuthModal({ title, aside, main, onClose }) {
   const body = createElement('div', 'auth-split');
   body.append(aside, main);
-  const { element, close } = openModal({ title, body });
+  const { element, close } = openModal({ title, body, onClose });
   element.classList.add('modal-auth');
   return close;
 }
@@ -199,6 +202,10 @@ export function openLoginModal() {
     event.preventDefault();
     close();
     openRegisterModal();
+  });
+  form.querySelector('[data-auth-forgot]').addEventListener('click', () => {
+    close();
+    openForgotModal();
   });
   form.elements.email.focus();
 }

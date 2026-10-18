@@ -2,13 +2,13 @@
 // Desktop: logo · menu (Trang chủ, Khóa học, Danh mục ▾, Giới thiệu) · tìm kiếm · Đăng nhập · Đăng ký miễn phí.
 // Mobile (≤ 960px, css/landing.css): logo + nút hamburger mở bảng menu.
 // Dropdown "Danh mục" và menu mobile dùng được bằng chuột, cảm ứng và bàn phím.
-import { supabase } from './supabase.js?v=202610172049';
-import { getCurrentProfile, getHomePage, getSession, isActive } from './auth.js?v=202610172049';
-import { openLoginModal } from './login-modal.js?v=202610172049';
-import { openRegisterModal } from './register-modal.js?v=202610172049';
-import { showFlashToast } from './components.js?v=202610172049';
-import { createIcon, createLogoImage } from './icons.js?v=202610172049';
-import { createElement } from './utils.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { getCurrentProfile, getHomePage, getSession, isActive } from './auth.js?v=202610180851';
+import { openLoginModal } from './login-modal.js?v=202610180851';
+import { openRegisterModal } from './register-modal.js?v=202610180851';
+import { showFlashToast } from './components.js?v=202610180851';
+import { createIcon, createLogoImage } from './icons.js?v=202610180851';
+import { createElement } from './utils.js?v=202610180851';
 
 // login.html là trang chủ công khai: banner + danh sách khóa học + nút Đăng nhập (popup)
 export const HOME_PAGE = 'login.html';

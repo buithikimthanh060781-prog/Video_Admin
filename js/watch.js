@@ -1,9 +1,9 @@
 // watch module: xem 1 video đã công khai + ghi nhận lượt xem + video khác
-import { supabase } from './supabase.js?v=202610172049';
-import { initLayout } from './layout.js?v=202610172049';
-import { createBadge, createStateView } from './components.js?v=202610172049';
-import { isYouTubeVideo, renderPlayerInto } from './player.js?v=202610172049';
-import { createElement, formatDate, formatDuration, formatNumber } from './utils.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { initLayout } from './layout.js?v=202610180851';
+import { createBadge, createStateView } from './components.js?v=202610180851';
+import { isYouTubeVideo, renderPlayerInto } from './player.js?v=202610180851';
+import { createElement, formatDate, formatDuration, formatNumber } from './utils.js?v=202610180851';
 
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';
 const RELATED_LIMIT = 6;

@@ -1,8 +1,8 @@
 // Trang Tài khoản: thông tin cá nhân + ảnh đại diện (ADMIN và USER đều truy cập được)
-import { supabase } from './supabase.js?v=202610172049';
-import { MEMBER_STATUSES, ROLE_LABELS } from './auth.js?v=202610172049';
-import { initLayout, createAvatar } from './layout.js?v=202610172049';
-import { createBadge, showToast } from './components.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { MEMBER_STATUSES, PHONE_PATTERN, ROLE_LABELS } from './auth.js?v=202610180851';
+import { initLayout, createAvatar } from './layout.js?v=202610180851';
+import { createBadge, showToast } from './components.js?v=202610180851';
 import {
   BUCKETS,
   FILE_RULES,
@@ -13,8 +13,8 @@ import {
   removeFiles,
   uploadFile,
   validateFile,
-} from './storage.js?v=202610172049';
-import { formatDate } from './utils.js?v=202610172049';
+} from './storage.js?v=202610180851';
+import { formatDate } from './utils.js?v=202610180851';
 
 let profile = null;
 const elements = {};
@@ -32,7 +32,58 @@ async function updateAvatarUrl(avatarUrl) {
   return data.avatar_url;
 }
 
+// Số điện thoại đọc riêng (không nằm trong profile chung): chưa chạy 15_member_phone.sql thì cột chưa có -> coi như chưa có số
+async function fetchPhone() {
+  const { data, error } = await supabase.from('profiles').select('phone').eq('id', profile.id).maybeSingle();
+  if (error) return { phone: '', supported: false };
+  return { phone: data?.phone || '', supported: true };
+}
+
+async function savePhone(phone) {
+  const { data, error } = await supabase
+    .from('profiles')
+    .update({ phone: phone || null })
+    .eq('id', profile.id)
+    .select('phone')
+    .maybeSingle();
+  if (error) throw error;
+  if (!data) throw new Error('not updated');
+  return data.phone || '';
+}
+
 // ---------- Render ----------
+
+function renderPhone(phone) {
+  const display = document.getElementById('account-phone');
+  display.textContent = phone || 'Chưa có';
+  display.classList.toggle('text-secondary', !phone);
+  elements.phoneInput.value = phone;
+}
+
+async function handlePhoneSubmit(event) {
+  event.preventDefault();
+  const phone = elements.phoneInput.value.trim();
+  elements.phoneError.textContent = '';
+  elements.phoneInput.classList.remove('is-invalid');
+  if (phone && !PHONE_PATTERN.test(phone)) {
+    elements.phoneError.textContent = 'Số điện thoại không hợp lệ (8–20 chữ số).';
+    elements.phoneInput.classList.add('is-invalid');
+    return;
+  }
+  elements.phoneSave.disabled = true;
+  try {
+    renderPhone(await savePhone(phone));
+    showToast('Đã cập nhật số điện thoại.', 'success');
+  } catch (error) {
+    // 42501: database chưa cấp quyền sửa cột phone (chưa chạy database/17_profile_phone_edit.sql)
+    const message = error?.code === '42501'
+      ? 'Chưa thể lưu số điện thoại: hệ thống chưa được cấp quyền. Vui lòng liên hệ quản trị viên.'
+      : 'Không thể cập nhật số điện thoại. Vui lòng thử lại.';
+    showToast(message, 'error', 5000);
+  } finally {
+    elements.phoneSave.disabled = false;
+  }
+}
 
 function replaceAvatar(target, className) {
   target.replaceWith(Object.assign(createAvatar(profile, className), { id: target.id }));
@@ -126,7 +177,15 @@ async function initAccountPage() {
 
   elements.input.addEventListener('change', handleAvatarSelected);
   elements.removeButton.addEventListener('click', removeAvatar);
+  elements.phoneForm = document.getElementById('phone-form');
+  elements.phoneInput = document.getElementById('phone-input');
+  elements.phoneError = document.getElementById('phone-error');
+  elements.phoneSave = document.getElementById('phone-save');
+  elements.phoneForm.addEventListener('submit', handlePhoneSubmit);
   renderAccount();
+  const { phone, supported } = await fetchPhone();
+  renderPhone(phone);
+  elements.phoneForm.hidden = !supported;
 }
 
 initAccountPage();

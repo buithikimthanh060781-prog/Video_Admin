@@ -78,6 +78,13 @@
 /* ---------- Thẻ khóa học (trang chủ, Khóa học, Khóa học của tôi) ---------- */
 .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
 .course-grid > .state-view { grid-column: 1 / -1; }
+
+/* Danh sách chia section theo lĩnh vực (course-catalog.js) */
+.course-grid.is-grouped { display: flex; flex-direction: column; gap: 44px; }
+.course-group-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--color-border-soft); }
+.course-group-title { margin: 0; padding-left: 14px; border-left: 4px solid var(--color-primary); font-size: 22px; font-weight: 800; line-height: 1.3; color: var(--color-heading); overflow-wrap: anywhere; }
+.course-group-count { color: var(--color-text-secondary); font-size: 14px; white-space: nowrap; }
+.course-group-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
 .course-card {
   position: relative;
   display: flex;

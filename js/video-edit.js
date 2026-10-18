@@ -1,8 +1,8 @@
 // video-edit module: thêm mới (không có ?id) hoặc sửa video (?id=...)
 // Nguồn video: UPLOAD (file trong Storage) hoặc YOUTUBE (link nhúng)
-import { supabase } from './supabase.js?v=202610172049';
-import { initLayout } from './layout.js?v=202610172049';
-import { createStateView, setFlashToast } from './components.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { initLayout } from './layout.js?v=202610180851';
+import { createStateView, setFlashToast } from './components.js?v=202610180851';
 import {
   BUCKETS,
   FILE_RULES,
@@ -15,7 +15,7 @@ import {
   removeFiles,
   uploadFile,
   validateFile,
-} from './storage.js?v=202610172049';
+} from './storage.js?v=202610180851';
 import {
   VIDEO_SOURCES,
   buildYouTubeWatchUrl,
@@ -24,8 +24,8 @@ import {
   isYouTubeThumbnail,
   isYouTubeVideo,
   parseYouTubeVideoId,
-} from './player.js?v=202610172049';
-import { createElement, debounce, formatBytes, formatDate, formatDuration, formatNumber, slugify } from './utils.js?v=202610172049';
+} from './player.js?v=202610180851';
+import { createElement, debounce, formatBytes, formatDate, formatDuration, formatNumber, slugify } from './utils.js?v=202610180851';
 
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';
 const VALID_STATUSES = ['PUBLISHED', 'DRAFT', 'HIDDEN'];

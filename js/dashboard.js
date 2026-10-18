@@ -1,9 +1,9 @@
-// Trang Tổng quan: thống kê, 10 video xem nhiều nhất, biểu đồ lượt xem
-import { supabase } from './supabase.js?v=202610172049';
-import { initLayout } from './layout.js?v=202610172049';
-import { createIcon } from './icons.js?v=202610172049';
-import { createStateView, renderTableState, showToast } from './components.js?v=202610172049';
-import { createElement, formatBytes, formatNumber } from './utils.js?v=202610172049';
+// Trang Dashboard (dashboard.html): thống kê, 10 video xem nhiều nhất, biểu đồ lượt xem
+import { supabase } from './supabase.js?v=202610180851';
+import { initLayout } from './layout.js?v=202610180851';
+import { createIcon } from './icons.js?v=202610180851';
+import { createStateView, renderTableState, showToast } from './components.js?v=202610180851';
+import { createElement, formatBytes, formatNumber } from './utils.js?v=202610180851';
 
 const TOP_LIMIT = 10;
 const PRIMARY_COLOR = '#ea580c';
@@ -267,7 +267,7 @@ const CHART_UNAVAILABLE = { message: 'Không tải được thư viện biểu �
 // ---------- Init ----------
 
 async function initDashboardPage() {
-  const profile = await initLayout('Tổng quan');
+  const profile = await initLayout('Dashboard');
   if (!profile) return;
 
   renderStatIcons();

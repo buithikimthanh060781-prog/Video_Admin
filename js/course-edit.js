@@ -1,8 +1,8 @@
 // course-edit module: thêm mới (không có ?id) hoặc sửa khóa học (?id=...)
 // Tab "Thông tin chung" lưu dữ liệu; tab "Xuất bản" đổi trạng thái DRAFT / PUBLISHED / HIDDEN.
-import { supabase } from './supabase.js?v=202610172049';
-import { initLayout } from './layout.js?v=202610172049';
-import { confirmModal, createBadge, createStateView, setFlashToast, showFlashToast, showToast } from './components.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { initLayout } from './layout.js?v=202610180851';
+import { confirmModal, createBadge, createStateView, setFlashToast, showFlashToast, showToast } from './components.js?v=202610180851';
 import {
   BUCKETS,
   FILE_RULES,
@@ -13,7 +13,7 @@ import {
   removeFiles,
   uploadFile,
   validateFile,
-} from './storage.js?v=202610172049';
+} from './storage.js?v=202610180851';
 import {
   COURSE_LANGUAGES,
   COURSE_LEVELS,
@@ -23,10 +23,10 @@ import {
   getFriendlyCourseError,
   getPublishMissing,
   updateCourseStatus,
-} from './course-utils.js?v=202610172049';
-import { initCurriculum } from './course-curriculum.js?v=202610172049';
-import { fetchCourseSections, renderCourseView, renderViewState } from './course-view.js?v=202610172049';
-import { createElement, formatDate, slugify } from './utils.js?v=202610172049';
+} from './course-utils.js?v=202610180851';
+import { initCurriculum } from './course-curriculum.js?v=202610180851';
+import { fetchCourseSections, renderCourseView, renderViewState } from './course-view.js?v=202610180851';
+import { createElement, formatDate, slugify } from './utils.js?v=202610180851';
 
 const THUMBNAIL_PLACEHOLDER = 'assets/thumbnail-placeholder.svg';
 const TITLE_MAX_LENGTH = 200;

@@ -1,18 +1,18 @@
 // course-catalog module: danh sách khóa học công khai (PUBLISHED)
 // Dùng cho login.html (trang chủ công khai) và explore.html (trong hệ thống, body[data-layout="app"]).
 // Hỗ trợ tham số URL: ?q=từ-khóa, ?category=ID, ?price=free (dùng bởi header và nút ở hero).
-import { supabase } from './supabase.js?v=202610172049';
-import { initLayout } from './layout.js?v=202610172049';
-import { initPublicLayout } from './public-layout.js?v=202610172049';
-import { createBadge, createPagedList, createStateView, showToast } from './components.js?v=202610172049';
-import { createPriceView } from './course-view.js?v=202610172049';
-import { getCategoryArt, setCourseImage } from './course-art.js?v=202610172049';
-import { ENROLLMENT_STATUSES, fetchMyEnrollmentMap } from './enrollment.js?v=202610172049';
-import { createIcon } from './icons.js?v=202610172049';
-import { createElement, debounce, escapeLikePattern } from './utils.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { initLayout } from './layout.js?v=202610180851';
+import { initPublicLayout } from './public-layout.js?v=202610180851';
+import { createBadge, createPagedList, createStateView, showToast } from './components.js?v=202610180851';
+import { createPriceView } from './course-view.js?v=202610180851';
+import { getCategoryArt, setCourseImage } from './course-art.js?v=202610180851';
+import { ENROLLMENT_STATUSES, fetchMyEnrollmentMap } from './enrollment.js?v=202610180851';
+import { createIcon } from './icons.js?v=202610180851';
+import { createElement, debounce, escapeLikePattern } from './utils.js?v=202610180851';
 
 const PAGE_SIZE_OPTIONS = [12, 24, 48];
-const CARD_COLUMNS = 'id, slug, title, thumbnail_url, instructor_name, price, sale_price, course_categories(name), course_sections(course_lessons(count))';
+const CARD_COLUMNS = 'id, slug, title, thumbnail_url, instructor_name, price, sale_price, category_id, course_categories(name, sort_order), course_sections(course_lessons(count))';
 // Khóa học miễn phí = giá niêm yết 0 hoặc giá khuyến mại 0
 const FREE_FILTER = 'price.eq.0,sale_price.eq.0';
 const PRICE_FREE = 'free';
@@ -40,6 +40,9 @@ async function fetchPublishedCourses({ page, pageSize }) {
     .from('courses')
     .select(CARD_COLUMNS, { count: 'exact' })
     .eq('status', 'PUBLISHED')
+    // Cùng lĩnh vực đứng liền nhau (theo thứ tự lĩnh vực) để chia section theo lĩnh vực
+    .order('course_categories(sort_order)', { nullsFirst: false })
+    .order('category_id', { nullsFirst: false })
     .order('sort_order')
     .order('created_at', { ascending: false })
     .range(from, from + pageSize - 1);
@@ -143,7 +146,35 @@ function createCourseCard(course) {
   return card;
 }
 
+// Chia danh sách thành các section nhỏ theo lĩnh vực: tiêu đề lĩnh vực + lưới khóa học của lĩnh vực đó
+function createCourseGroup(name, courses) {
+  const group = createElement('section', 'course-group');
+  const head = createElement('div', 'course-group-head');
+  const title = createElement('h3', 'course-group-title', name);
+  head.append(title, createElement('span', 'course-group-count', `${courses.length} khóa học`));
+  const grid = createElement('div', 'course-group-grid');
+  grid.append(...courses.map(createCourseCard));
+  group.append(head, grid);
+  return group;
+}
+
+function renderCourseGroups(rows) {
+  elements.grid.classList.add('is-grouped');
+  const groups = [];
+  rows.forEach((course) => {
+    const key = course.category_id ?? 'none';
+    let group = groups[groups.length - 1];
+    if (!group || group.key !== key) {
+      group = { key, name: course.course_categories?.name || 'Lĩnh vực khác', courses: [] };
+      groups.push(group);
+    }
+    group.courses.push(course);
+  });
+  return groups.map((group) => createCourseGroup(group.name, group.courses));
+}
+
 function renderGridState(type, options) {
+  elements.grid.classList.remove('is-grouped');
   elements.grid.replaceChildren(createStateView(type, options));
 }
 
@@ -295,6 +326,7 @@ async function initCatalogPage() {
     paginationContainer: document.getElementById('pagination'),
     fetchPage: fetchPublishedCourses,
     renderItem: createCourseCard,
+    renderItems: renderCourseGroups,
     renderState: renderGridState,
     getEmptyState,
     pageSize: PAGE_SIZE_OPTIONS[0],

@@ -300,7 +300,9 @@ html { scroll-behavior: smooth; }
 .landing-page .course-filters input[type="search"]:focus { background-color: var(--color-bg); }
 .landing-page .course-filters select { flex: 0 1 220px; height: 48px; font-size: 15px; cursor: pointer; }
 /* 3 khóa học mỗi hàng trên desktop, 2 trên tablet, 1 trên mobile */
-.landing-page .course-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.landing-page .course-grid,
+.landing-page .course-group-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.landing-page .course-grid.is-grouped { display: flex; }
 
 /* =========================================================
    Footer: navy
@@ -333,7 +335,8 @@ html { scroll-behavior: smooth; }
 
 /* Mobile/tablet nhỏ: menu hamburger */
 @media (max-width: 960px) {
-  .landing-page .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .landing-page .course-grid,
+  .landing-page .course-group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   /* Tablet: ô tìm kiếm một hàng, 2 bộ lọc chia đôi hàng dưới */
   .landing-page .course-filters input[type="search"] { flex-basis: 100%; }
   .landing-page .course-filters select { flex: 1 1 200px; }
@@ -391,7 +394,9 @@ html { scroll-behavior: smooth; }
   .course-filters input,
   .course-filters select { flex: 1 1 100%; min-width: 0; font-size: 16px; }
   .course-filters input[type="search"] { min-width: 0; }
-  .landing-page .course-grid { grid-template-columns: minmax(0, 1fr); }
+  .landing-page .course-grid,
+  .landing-page .course-group-grid { grid-template-columns: minmax(0, 1fr); }
+  .course-group-title { font-size: 19px; }
 }
 
 @media (max-width: 360px) {

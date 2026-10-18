@@ -1,9 +1,9 @@
 // Layout dùng chung: Sidebar + Header + User menu + Mobile menu
-import { supabase } from './supabase.js?v=202610172049';
-import { requireAuth, isAdmin, signOut, getHomePage } from './auth.js?v=202610172049';
-import { createIcon, createLogoImage } from './icons.js?v=202610172049';
-import { createNotificationBell } from './notifications.js?v=202610172049';
-import { createElement, debounce, getInitials } from './utils.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { requireAuth, isAdmin, signOut, getHomePage } from './auth.js?v=202610180851';
+import { createIcon, createLogoImage } from './icons.js?v=202610180851';
+import { createNotificationBell } from './notifications.js?v=202610180851';
+import { createElement, debounce, getInitials } from './utils.js?v=202610180851';
 
 const ENROLLMENTS_PAGE = 'enrollments.html';
 const USERS_PAGE = 'users.html';
@@ -12,9 +12,14 @@ const ACCOUNT_PAGE = 'account.html';
 // Menu chia theo nhóm quản lý. title rỗng = không hiện tiêu đề nhóm.
 const MENU_GROUPS = [
   {
-    title: '',
+    title: 'Tổng quan',
     adminOnly: true,
-    items: [{ href: 'index.html', label: 'Tổng quan', icon: 'dashboard' }],
+    items: [{ href: 'index.html', label: 'Bắt đầu quản trị', icon: 'check' }],
+  },
+  {
+    title: 'Dashboard',
+    adminOnly: true,
+    items: [{ href: 'dashboard.html', label: 'Thống kê & biểu đồ', icon: 'dashboard' }],
   },
   {
     title: 'Quản lý khóa học',

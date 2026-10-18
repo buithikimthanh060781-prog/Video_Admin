@@ -1,11 +1,11 @@
 // course-detail module: chi tiết một khóa học (?slug=...)
 // Dùng cho course-detail.html (trang công khai) và explore-detail.html (trong hệ thống, body[data-layout="app"]).
-import { supabase } from './supabase.js?v=202610172049';
-import { initLayout } from './layout.js?v=202610172049';
-import { HOME_PAGE, initPublicLayout } from './public-layout.js?v=202610172049';
-import { openLoginModal } from './login-modal.js?v=202610172049';
-import { fetchCourseSections, renderCourseView, renderViewState } from './course-view.js?v=202610172049';
-import { createEnrollmentCta, fetchMyEnrollment } from './enrollment.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { initLayout } from './layout.js?v=202610180851';
+import { HOME_PAGE, initPublicLayout } from './public-layout.js?v=202610180851';
+import { openLoginModal } from './login-modal.js?v=202610180851';
+import { fetchCourseSections, renderCourseView, renderViewState } from './course-view.js?v=202610180851';
+import { createEnrollmentCta, fetchMyEnrollment } from './enrollment.js?v=202610180851';
 
 const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const COURSE_COLUMNS = 'id, title, slug, instructor_name, short_description, description, target_audience, learning_outcomes, requirements, level, language, thumbnail_url, price, sale_price, status, course_categories(name)';

@@ -8,9 +8,9 @@
   <link rel="icon" type="image/png" sizes="64x64" href="assets/images/brand/favicon-64.png">
   <link rel="apple-touch-icon" href="assets/images/brand/logo-icon-192.png">
   <title>Tài khoản - Học Vèo</title>
-  <link rel="stylesheet" href="css/style.css?v=202610172049">
-  <link rel="stylesheet" href="css/responsive.css?v=202610172049">
-  <link rel="stylesheet" href="css/learning.css?v=202610172049">
+  <link rel="stylesheet" href="css/style.css?v=202610180851">
+  <link rel="stylesheet" href="css/responsive.css?v=202610180851">
+  <link rel="stylesheet" href="css/learning.css?v=202610180851">
 </head>
 <body class="auth-pending">
   <div class="admin-layout">
@@ -37,14 +37,26 @@
           <dl class="info-list">
             <dt>Tên đăng nhập</dt><dd id="account-username"></dd>
             <dt>Email</dt><dd id="account-email"></dd>
+            <dt>Số điện thoại</dt><dd id="account-phone"></dd>
             <dt>Vai trò</dt><dd id="account-role"></dd>
             <dt>Trạng thái</dt><dd id="account-status"></dd>
             <dt>Ngày tạo</dt><dd id="account-created-at"></dd>
           </dl>
+
+          <form id="phone-form" class="phone-form" novalidate>
+            <h3 class="section-subtitle">Cập nhật số điện thoại</h3>
+            <div class="form-group">
+              <label for="phone-input">Số điện thoại</label>
+              <input id="phone-input" name="phone" type="tel" autocomplete="tel" maxlength="20" placeholder="vd: 0912 345 678">
+              <small class="form-hint">Quản trị viên liên hệ qua số này để kích hoạt khóa học. Để trống nếu muốn xóa số.</small>
+              <small class="field-error" id="phone-error"></small>
+            </div>
+            <button type="submit" id="phone-save" class="btn btn-primary btn-sm">Lưu số điện thoại</button>
+          </form>
         </div>
       </main>
     </div>
   </div>
-  <script type="module" src="js/account.js?v=202610172049"></script>
+  <script type="module" src="js/account.js?v=202610180851"></script>
 </body>
 </html>

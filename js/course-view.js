@@ -1,11 +1,11 @@
 // Hiển thị khóa học theo góc nhìn khách hàng. Dùng cho trang course-detail.html và tab "Xem trước" của admin.
 // Khách chỉ thấy thông tin + đề cương. Video chỉ phát được với bài "Học thử" và khi đã đăng nhập.
-import { supabase } from './supabase.js?v=202610172049';
-import { createBadge, createStateView, showToast } from './components.js?v=202610172049';
-import { setCourseImage } from './course-art.js?v=202610172049';
-import { COURSE_LANGUAGES, COURSE_LEVELS } from './course-utils.js?v=202610172049';
-import { openVideoModal } from './player.js?v=202610172049';
-import { createElement, formatCurrency } from './utils.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { createBadge, createStateView, showToast } from './components.js?v=202610180851';
+import { setCourseImage } from './course-art.js?v=202610180851';
+import { COURSE_LANGUAGES, COURSE_LEVELS } from './course-utils.js?v=202610180851';
+import { openVideoModal } from './player.js?v=202610180851';
+import { createElement, formatCurrency } from './utils.js?v=202610180851';
 
 const SECTION_COLUMNS = 'id, title, description, sort_order, course_lessons(id, video_id, title, description, sort_order, is_preview, is_active)';
 

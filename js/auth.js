@@ -1,6 +1,6 @@
 // Authentication: Supabase Auth + kiểm tra session/role
-import { supabase } from './supabase.js?v=202610172049';
-import { setFlashToast } from './components.js?v=202610172049';
+import { supabase } from './supabase.js?v=202610180851';
+import { setFlashToast } from './components.js?v=202610180851';
 
 export const ROLE_ADMIN = 'ADMIN';
 // Trang chủ công khai; popup đăng nhập chỉ mở khi người dùng bấm nút "Đăng nhập"
@@ -39,6 +39,8 @@ export function getFriendlyAuthError(error) {
   if (message.includes('rate limit') || error?.status === 429) return 'Bạn thao tác quá nhanh. Vui lòng thử lại sau.';
   if (message.includes('same as the old')) return 'Mật khẩu mới phải khác mật khẩu cũ.';
   if (message.includes('password')) return `Mật khẩu phải có ít nhất ${MIN_PASSWORD_LENGTH} ký tự.`;
+  if (message.includes('reset not installed')) return 'Chức năng quên mật khẩu chưa được cài đặt. Vui lòng liên hệ quản trị viên.';
+  if (message.includes('quá nhiều lần')) return error.message;
   if (message.includes('failed to fetch')) return 'Không thể kết nối máy chủ. Kiểm tra mạng và thử lại.';
   return 'Đã xảy ra lỗi. Vui lòng thử lại.';
 }
@@ -144,9 +146,9 @@ export async function signUp({ username, email, password, phone }) {
   return data;
 }
 
-export async function sendResetPasswordEmail(email) {
+export async function sendResetPasswordEmail(email, page = 'reset-password.html') {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: new URL('reset-password.html', location.href).href,
+    redirectTo: new URL(page, location.href).href,
   });
   if (error) throw error;
 }
@@ -157,7 +159,7 @@ export async function updatePassword(password) {
 }
 
 // Xóa session; lỗi mạng không được chặn luồng chính nên chỉ trả về true/false.
-async function clearSession() {
+export async function clearSession() {
   try {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
@@ -181,14 +183,14 @@ function setFieldError(form, name, message) {
   if (input) input.classList.toggle('is-invalid', Boolean(message));
 }
 
-function clearFormErrors(form) {
+export function clearFormErrors(form) {
   form.querySelectorAll('[data-error-for]').forEach((element) => {
     setFieldError(form, element.dataset.errorFor, '');
   });
   showFormMessage(form, '');
 }
 
-function showFormMessage(form, message, type = 'error') {
+export function showFormMessage(form, message, type = 'error') {
   const messageElement = form.querySelector('.form-message');
   if (!messageElement) return;
   messageElement.textContent = message;
@@ -196,7 +198,7 @@ function showFormMessage(form, message, type = 'error') {
   messageElement.hidden = !message;
 }
 
-function setSubmitting(form, isSubmitting, loadingText) {
+export function setSubmitting(form, isSubmitting, loadingText) {
   const button = form.querySelector('button[type="submit"]');
   if (!button) return;
   if (!button.dataset.label) button.dataset.label = button.textContent;
@@ -228,6 +230,35 @@ function validatePasswordConfirm(form, password, confirmPassword) {
   return false;
 }
 
+// ---------- Quên mật khẩu bằng popup (login.html) ----------
+// Email + số điện thoại phải khớp hồ sơ thì mật khẩu mới có hiệu lực ngay (database/18_reset_password_by_phone.sql).
+// Trả về true nếu đổi được, false nếu email hoặc số điện thoại không đúng.
+export async function resetPasswordWithPhone({ email, phone, password }) {
+  const { data, error } = await supabase.rpc('reset_password_with_phone', {
+    p_email: email,
+    p_phone: phone,
+    p_new_password: password,
+  });
+  if (error) {
+    // Hàm chưa được cài vào database (chưa chạy file 18)
+    if (error.code === 'PGRST202') throw new Error('reset not installed');
+    // Thông báo tiếng Việt do database chủ động trả về (vd: sai quá nhiều lần)
+    if (error.code === 'P0001') throw new Error(error.message);
+    throw error;
+  }
+  return data === true;
+}
+
+export function validateResetForm(form, { email, phone, password, confirmPassword }) {
+  let isValid = validateEmail(form, email);
+  if (!PHONE_PATTERN.test(phone)) {
+    setFieldError(form, 'phone', phone ? 'Số điện thoại không hợp lệ (8–20 chữ số).' : 'Vui lòng nhập số điện thoại.');
+    isValid = false;
+  }
+  isValid = validatePassword(form, 'password', password) && isValid;
+  isValid = validatePasswordConfirm(form, password, confirmPassword) && isValid;
+  return isValid;
+}
 // ---------- Pages ----------
 
 // Gắn xử lý đăng nhập cho form (dùng trong popup đăng nhập, xem login-modal.js).

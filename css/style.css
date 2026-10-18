@@ -682,6 +682,31 @@ body.auth-pending .admin-layout { visibility: hidden; }
 .row-pending td { background: #fffbeb; }
 .table-actions { align-items: center; }
 .cell-note { font-size: 13px; white-space: nowrap; }
+/* Checklist "Bắt đầu quản trị" (admin-checklist.js) */
+.onboard-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.onboard-sub { margin: 4px 0 0; color: var(--color-text-secondary); font-size: 14px; max-width: 640px; }
+.onboard-progress { display: flex; align-items: center; gap: 12px; margin: 16px 0; }
+.onboard-progress .progress-track { flex: 1; height: 10px; overflow: hidden; border-radius: 999px; background: var(--color-border); }
+.onboard-progress .progress-fill { height: 100%; border-radius: 999px; background: var(--color-primary); transition: width 300ms ease; }
+.onboard-progress .progress-fill.is-done { background: var(--color-success); }
+.onboard-count { font-size: 14px; font-weight: 700; color: var(--color-secondary); white-space: nowrap; }
+.onboard-list { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.onboard-step { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-bg); }
+.onboard-step.is-done { background: var(--color-surface); }
+.onboard-mark { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--color-border-hover); color: var(--color-primary-strong); font-size: 14px; font-weight: 700; }
+.onboard-step.is-done .onboard-mark { border-color: var(--color-success); background: var(--color-success); color: #fff; }
+.onboard-text { flex: 1; min-width: 0; }
+.onboard-title { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--color-heading); }
+.onboard-status { padding: 1px 8px; border-radius: 999px; background: var(--color-primary-soft); color: var(--color-primary-strong); font-size: 12px; font-weight: 600; }
+.onboard-step.is-done .onboard-status { background: #dcfce7; color: #166534; }
+.onboard-hint, .onboard-detail { margin: 2px 0 0; font-size: 14px; color: var(--color-text-secondary); }
+.onboard-detail { color: var(--color-primary-strong); font-weight: 600; }
+.onboard-step .btn { flex-shrink: 0; }
+@media (max-width: 600px) {
+  .onboard-step { flex-wrap: wrap; }
+  .onboard-step .btn { width: 100%; }
+}
+
 .cell-phone { color: var(--color-primary-strong); font-weight: 600; white-space: nowrap; }
 
 /* ---------- Account ---------- */

@@ -1,6 +1,6 @@
 // Reusable components: Toast, Modal, Pagination, Table states
-import { createElement } from './utils.js?v=202610172049';
-import { createIcon } from './icons.js?v=202610172049';
+import { createElement } from './utils.js?v=202610180851';
+import { createIcon } from './icons.js?v=202610180851';
 
 // ---------- Toast ----------
 
@@ -254,6 +254,7 @@ export function createPagedList({
   paginationContainer,
   fetchPage,
   renderItem,
+  renderItems: renderAllItems, // tuỳ chọn: (rows) => Node[] để tự vẽ cả danh sách (vd chia nhóm); mặc định vẽ từng renderItem
   renderState,
   getEmptyState,
   pageSize = 10,
@@ -282,6 +283,7 @@ export function createPagedList({
 
   function renderItems(rows) {
     if (rows.length === 0) renderState('empty', getEmptyState?.());
+    else if (renderAllItems) container.replaceChildren(...renderAllItems(rows));
     else container.replaceChildren(...rows.map(renderItem));
   }
 
